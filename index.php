@@ -18,7 +18,7 @@ session_start();
 		<!--Javascript enabled??-->
 
 		<noscript>
-		    <script>alert("Javascript Requires");</script>
+		    
 		<meta http-equiv="refresh" content="0; url=nojavascript.html" />
 		</noscript>
 
