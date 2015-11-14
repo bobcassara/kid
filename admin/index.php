@@ -1,0 +1,48 @@
+<?php session_start();?>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>TAC Ticket Queue</title>
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<script type="text/javascript" src="../js/datepickr.js"></script>
+	<script src="../js/jquery-2.1.3.min.js"></script>
+	<script src="../js/functions.js"></script>
+	
+</head>
+<?php
+//Error Reporting
+error_reporting(0);
+
+//Lets Connect to the db
+
+include("../mysql_connect.php");
+
+if(!isset($_SESSION['user'])) {
+	print "<h2>Please Login</h2>";
+	print "<form action = login.php method = post>
+	<b>Name: </b><input type = text name = username>
+	<b>Password: </b><input type = password name = password>
+	<input type = submit name = submit value = Submit>
+	</form>";
+	exit();
+} 
+if (isset($_SESSION['user'])){
+	$username=$_SESSION['user'];
+    $query="SELECT * FROM staff WHERE username = '$username'";
+	$result = mysqli_query($connection,$query);
+	$row = $result->fetch_assoc();
+    $name = $row['name'];
+	}
+
+?>
+<body>
+<?php	
+//Include the header
+
+require('adminHeader.html');
+
+?>	
+</body>
+
+</html>

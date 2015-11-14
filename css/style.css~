@@ -1,0 +1,335 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	background-color:#ffffff;
+	width:1200px;
+	margin:0px auto;
+	text-align:center;
+}
+h1 {
+	font-size:20px;
+	color:#115db2;
+}
+h4 {
+	font-size:15px;
+	color:#115db2;
+}
+td {
+	text-align: left;
+	
+}
+table.th {
+	text-decoration:underline;
+}
+input {
+	font-family: Arial, Helvetica, sans-serif;
+	
+	font-size: 12px;
+	background-color: #FFFFFF;
+}
+
+.modelTextBox{
+	width:100px;
+}
+.ticketTextBox {
+	display:none
+	}
+.problemTextBox {
+	width:700px;
+	}	
+select {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	background-color:white;
+	
+}
+hr {
+	clear:both;
+	margin:0;
+	color: #115db2;
+	background-color: #115db2;
+	height: 3px;
+}
+
+
+a img{ 
+	border:0;
+}
+table {
+	border-collapse: collapse;
+}
+table td {
+	padding:5px;
+}
+
+table.searchtable {
+	width:100%;
+	background-color:#E8E8E8;
+	border-spacing: 10px;
+}
+table#mainTable {
+	width:1185px;
+}
+table#mainTable td {
+	/*background-color:white;*/
+	border: 1px;
+	padding: 5px;
+	border-style: solid;
+	border-color: #999999;
+}
+.howTo td {
+	background-color:#C2FFA3;
+	border: 1px;
+	padding: 1px;
+	border-style: solid;
+	border-color: #999999;
+}
+#mainWindow {
+	height: 350px;
+        width: 100%;
+        overflow: scroll;
+        overflow-y: scroll;
+	overflow-x: hidden;
+}
+#mainTableHeader td{
+	width:1185px;
+	table-layout: fixed;
+	color:#115db2;
+	text-align:center;
+	font-weight:bold;
+
+}
+
+.noSolution {
+	text-align:right;
+
+}
+/*--------------Sub Cats-----------------*/
+.printCode {
+	display:none;
+	color:red;
+	
+}
+.scanCode {
+	display:none;
+	color:red;
+}
+.imageCode {
+	display:none;
+	color:red;
+}
+.faxCode {
+	display:none;
+	color:red;
+}
+.jam {
+	display:none;
+	color:red;
+}
+.serviceCode {
+	display:none;
+	color:red;
+}
+
+
+/*----------------------------------------*/
+
+.hideModels {
+	display:none;
+	}
+
+#divDatabaseManagement {
+	width:200px;	
+text-align:center;
+	margin-left: auto;
+    margin-right: auto;
+}	
+#tableDatabaseManagement {
+	margin-left: auto;
+    margin-right: auto;
+	border:10px;
+	/*background-color:#115db2;*/
+}
+#divDatabaseManagement input{
+	width:150px;
+}
+#tableReports {
+	margin-left: auto;
+    margin-right: auto;
+	border:10px;
+	background-color:#115db2;
+}
+#tableReports td{
+	padding:10px;
+}
+.calendar {
+				font-family: 'Trebuchet MS', Tahoma, Verdana, Arial, sans-serif;
+				font-size: 0.9em;
+				background-color: #EEE;
+				color: #333;
+				/*border: 1px solid #DDD;
+				-moz-border-radius: 4px;
+				-webkit-border-radius: 4px;*/
+				border-radius: 4px;
+				padding: 0.2em;
+				width: 14em;
+			}
+			
+			.calendar .months {
+				background-color: #115db2;
+				border: 1px solid #E78F08;
+				/*-moz-border-radius: 4px;
+				-webkit-border-radius: 4px;*/
+				border-radius: 4px;
+				color: #FFF;
+				padding: 0.2em;
+				text-align: center;
+			}
+			
+			.calendar .prev-month,
+			.calendar .next-month {
+				padding: 0;
+			}
+			
+			.calendar .prev-month {
+				float: left;
+			}
+			
+			.calendar .next-month {
+				float: right;
+			}
+			
+			.calendar .current-month {
+				margin: 0 auto;
+			}
+			
+			.calendar .months .prev-month,
+			.calendar .months .next-month {
+				color: #FFF;
+				text-decoration: none;
+				padding: 0 0.4em;
+				/*-moz-border-radius: 4px;
+				-webkit-border-radius: 4px;*/
+				border-radius: 4px;
+				cursor: pointer;
+			}
+			
+			.calendar .months .prev-month:hover,
+			.calendar .months .next-month:hover {
+				background-color: #FDF5CE;
+				color: #C77405;
+			}
+			
+			.calendar table {
+				border-collapse: collapse;
+				padding: 0;
+				font-size: 0.8em;
+				width: 100%;
+			}
+			
+			.calendar th {
+				text-align: center;
+			}
+			
+			.calendar td {
+				text-align: right;
+				padding: 1px;
+				width: 14.3%;
+			}
+			
+			.calendar td span {
+				display: block;
+				color: #1C94C4;
+				background-color: #F6F6F6;
+				border: 1px solid #CCC;
+				text-decoration: none;
+				padding: 0.2em;
+				cursor: pointer;
+			}
+			
+			.calendar td span:hover {
+				color: #C77405;
+				background-color: #FDF5CE;
+				border: 1px solid #FBCB09;
+			}
+			
+			.calendar td.today span {
+				background-color: #FFF0A5;
+				border: 1px solid #FED22F;
+				color: #363636;
+			}
+#updateButton {
+				height:50px;
+			}
+#reset {
+				height:50px;
+				}
+#addNew {
+	display:none;
+	}
+#admin {
+	display:none;
+	}
+.suggestion {
+	display:none;
+	}
+.hidden {
+	display:none;
+	}
+.button
+{
+  font-family: Tahoma;
+  font-size: 10px;
+  font-weight: bold;
+  color: #115db2;
+  padding-top: 3px;
+  padding-right: 3px;
+  padding-bottom: 3px;
+  padding-left: 3px;
+  border-top-width: 1px;
+  /*border-right-width-value: 1px;*/
+  border-bottom-width: 1px;
+  /*border-left-width-value: 1px;*/
+  border-top-style: solid;
+  /*border-right-style-value: solid;*/
+  border-bottom-style: solid;
+  /*border-left-style-value: solid;*/
+  border-top-color: #115db2;
+  /*border-right-color-value: #115db2;*/
+  border-bottom-color: #115db2;
+  /*border-left-color-value: #115db2;*/
+  border-image-source: none;
+  border-image-slice: 100% 100% 100% 100%;
+  border-image-width: 1 1 1 1;
+  border-image-outset: 0 0 0 0;
+  border-image-repeat: stretch stretch;
+  background-image: url("images/button_bg.gif");
+  background-repeat: repeat-x;
+  background-position: center bottom;
+  background-color: #fefefe;
+  height: 25px;
+  
+}
+.button:hover {
+  background-image: none;
+  background-color: #99ffff;
+}
+/*Admin Page*/
+.nav_left {
+	float:left;
+	font-size:20px;
+	background-color:#ccc;
+
+}
+.adminTable {
+	margin-left:100px;	
+float:left;
+
+	color:#115db2;
+}
+tr.row1 {
+	background-color:#ccc;}
