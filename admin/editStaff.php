@@ -45,10 +45,10 @@ if (isset($_REQUEST['staffId'])) {//Staff member
     $query = "SELECT * FROM staff WHERE staffId ='$staffId'";
     $result = mysqli_query($connection, $query);
             $totalRows = mysqli_num_rows($result);
-
+	echo "<table class='staffTable'>";
     while ($row = $result -> fetch_assoc()) {
-        echo"<table><tr><td>";
-        echo "<td>".$row['name']."</td><td>";
+        
+        echo "<tr><td>".$row['name']."</td><td>";
         echo $row['username']."</td><td>";
         echo $row['password']."</td></tr>";        
         }
