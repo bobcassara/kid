@@ -382,7 +382,7 @@ session_start();
 						</button>
 					</div></td>
 					<?php
-                    if (isset($_SESSION['admin'])) {
+                    if (isset($_SESSION['admin'])AND ($_SESSION['admin']>=2)) {
                         echo "<td>
 					<center>
 						<button class='button' id='admin'>

@@ -33,9 +33,9 @@ if (($password !="") && ($password==$row['password'])){
 	
 	
 	//Are you an admin?
-		if ($row['admin']==1) {
+		if ($row['admin']!=0) {
 			//setcookie('admin', 'yes', time() + (86400), "/"); // 86400 = 1 day
-	        $_SESSION['admin']="true";}
+	        $_SESSION['admin']=$row['admin'];}
 	//Set the cookie
 	$_SESSION['user']=$row['username'];
 	$_SESSION['name']=$row['name'];

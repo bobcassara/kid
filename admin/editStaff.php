@@ -12,15 +12,15 @@
 </head>
 <?php
 //Error Reporting
-error_reporting(0);
+//error_reporting(0);
 
 //Lets Connect to the db
 
 include("../mysql_connect.php");
 
 if(!isset($_SESSION['user'])) {
-	print "<h2>Please Login</h2>";
-	print "<form action = login.php method = post>
+	echo "<h2>Please Login</h2>";
+	echo "<form action = login.php method = post>
 	<b>Name: </b><input type = text name = username>
 	<b>Password: </b><input type = password name = password>
 	<input type = submit name = submit value = Submit>
@@ -36,16 +36,29 @@ if (isset($_SESSION['user'])){
 	}
 //init the variables
 $edit="";
+
+
+//Get variables from url
+
+if (isset($_REQUEST['staffId'])) {//Staff member
+    $staffId = $_REQUEST['staffId'];
+    $query = "SELECT * FROM staff WHERE staffId ='$staffId'";
+    $result = mysqli_query($connection, $query);
+            $totalRows = mysqli_num_rows($result);
+
+    while ($row = $result -> fetch_assoc()) {
+        echo"<table><tr><td>";
+        echo "<td>".$row['name']."</td><td>";
+        echo $row['username']."</td><td>";
+        echo $row['password']."</td></tr>";        
+        }
+        
+}
+
 ?>
 <body>
 
 <?php	
-echo "EDIT = ".$edit;
-echo var_dump($staff);
-echo var_dump($staffID);
-echo var_dump($staffnumrows);
-
-
 
 //Include the header
 
