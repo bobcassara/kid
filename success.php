@@ -40,7 +40,7 @@
             if (isset($_SESSION['user'])) {
                 $author = $_SESSION['user'];
             }
-
+            //TODO convert author to user name
             //The Query
 
             //Update Success table
