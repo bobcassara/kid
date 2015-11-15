@@ -1,74 +1,65 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
-<title>Knowledge Database</title>
-<link href="style.css" rel="stylesheet" type="text/css" />
-<script src="jquery-2.1.3.min.js"></script>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+		<title>Knowledge Database</title>
+		<link href="style.css" rel="stylesheet" type="text/css" />
+		<script src="jquery-2.1.3.min.js"></script>
 
-</head>	
-<body>
+	</head>
+	<body>
 
-<?php
-//Connect to the database
+		<?php
+        //Connect to the database
 
-include("mysql_connect.php");
+        include ("mysql_connect.php");
 
+        //Get the id number and ticket number
 
-//Get the id number and ticket number
+        $id = mysqli_real_escape_string($connection, $_GET['id']);
+        $ticket = mysqli_real_escape_string($connection, $_GET['ticket']);
 
-$id= mysqli_real_escape_string($connection, $_GET['id']);
-$ticket = mysqli_real_escape_string($connection, $_GET['ticket']);
+        if (isset($_REQUEST['ticket'])) {
+            $ticket = $_REQUEST['ticket'];
 
+            //Lets get the hit count
 
-if (isset($_REQUEST['ticket'])){
-	$ticket = $_REQUEST['ticket'];
+            $query = "SELECT * FROM success where repairID = '$id'";
 
+            $result = mysqli_query($connection, $query);
+            $hitsnumrows = mysqli_num_rows($result);
 
-//Lets get the hit count
+            if ($hitsnumrows > 0) {
+                $hitsnumrows = $hitsnumrows + 1;
+            } else {
+                $hitsnumrows = 1;
+            }
 
-$query = "SELECT * FROM success where repairID = '$id'";
+            //Get author from cookie
+            if (isset($_SESSION['user'])) {
+                $author = $_SESSION['user'];
+            }
 
-$result = mysqli_query($connection,$query);
-$hitsnumrows= mysqli_num_rows($result);
+            //The Query
 
-if ($hitsnumrows > 0) {
-	$hitsnumrows = $hitsnumrows+1;
-	}else{
-		$hitsnumrows=1;}
+            //Update Success table
+            $query = "INSERT INTO success VALUES('$ticket', '$id', '$hitsnumrows', '$author', NOW(), NULL)";
+            mysqli_query($connection, $query);
+            //print $query;
 
-//Get author from cookie
-if(isset($_COOKIE['user'])) {
-    $author= $_COOKIE['user'];
-} 
+            //Update Sharp Table
+            $query = "UPDATE sharp
+		SET success = '$hitsnumrows'
+		WHERE id = '$id'";
+            //print $query;
+            mysqli_query($connection, $query);
 
+            header('location:index.php?id=' . $id . '&submit=submitted');
 
-//The Query
+        }
+		?>
 
-//Update Success table
-$query = "INSERT INTO success VALUES('$ticket', '$id', '$hitsnumrows', '$author', NOW(), NULL)";
-mysqli_query($connection,$query);
-//print $query;
-
-//Update Sharp Table
-$query = "UPDATE sharp
-	SET success = '$hitsnumrows' 
-	WHERE id = '$id'";
-//print $query;
-mysqli_query($connection,$query);
-
-
-header('location:index.php?id='.$id.'&submit=submitted');
-
-}
-
-?>
-
-
-
-
-
-</body>
+	</body>
 </html>
-
 

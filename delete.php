@@ -10,12 +10,8 @@ include ("mysql_connect.php");
 //Lets get the form variables
 
 if (isset($_REQUEST['id'])) {//ID
-	$id = $_REQUEST['id'];
+    $id = $_REQUEST['id'];
 }
-
-//DEBUG
-
-//echo $id;
 
 //Delete this ID from the database
 
@@ -25,7 +21,7 @@ print $query;
 
 if (mysqli_query($connection, $query)) {
 
-	mysqli_close($connection);
+    mysqli_close($connection);
 }
 
 header('location:index.php');

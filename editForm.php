@@ -48,21 +48,6 @@ while ($row = $result -> fetch_assoc()) {
     $enteredBy = $row['staffId'];
     $howTo = $row['howTo'];
 }
-//Debug//
-
-//print $model."<br>";
-//print $ticket."<br>";
-//print $status ."<br>";
-//print $family ."<br>";
-//print $class ."<br>";
-//print $category ."<br>";
-//print $problem ."<br>";
-//print $solution ."<br>";
-//print $date ."<br>";
-//print $enteredBy ."<br>";
-//print $howTo . "<br>";
-
-//Define EnteredBy default value
 
 $newquery = "SELECT * FROM staff WHERE staffId = $enteredBy";
 $newresult = mysqli_query($connection, $newquery);
@@ -97,9 +82,9 @@ $status = $newrow['status'];
 </tr>
 	
 		<script type="text/javascript">
-			new datepickr('datepick', {
-				dateFormat : 'Y-m-d'
-			});
+            new datepickr('datepick', {
+                dateFormat : 'Y-m-d'
+            });
 			</script>
 <tr>
 	<td>Author:</td>
@@ -127,16 +112,16 @@ $status = $newrow['status'];
 	<td>Status:</td>
 	<td><select name="statusId">
 	<?php
-        for ($i = 0; $i < $statusnumrows; $i++) {
+    for ($i = 0; $i < $statusnumrows; $i++) {
 
-            echo $StatusId[$i];
+        echo $StatusId[$i];
 
-            if ($statusId == $StatusId[$i]) {
-                echo "<option selected = 'selected'  value = '" . $StatusId[$i] . "'>" . $Status[$i] . "</option>";
-            } else {
-                echo "<option value = '" . $StatusId[$i] . "'>" . $Status[$i] . "</option>";
-            }
+        if ($statusId == $StatusId[$i]) {
+            echo "<option selected = 'selected'  value = '" . $StatusId[$i] . "'>" . $Status[$i] . "</option>";
+        } else {
+            echo "<option value = '" . $StatusId[$i] . "'>" . $Status[$i] . "</option>";
         }
+    }
     ?>
 	</select></td>
 </tr>
@@ -168,12 +153,12 @@ $status = $newrow['status'];
 <tr>
 	<td>How To?:</td>
 	<td>Yes<input type="radio" name="howTo" value= "yes" <?php
-        if ($howTo == "yes") {echo "checked = checked";
-        }
+    if ($howTo == "yes") {echo "checked = checked";
+    }
     ?><br>
 	No<input type="radio" name="howTo" value= "no" <?php
-        if ($howTo != "yes") {echo "checked = checked";
-        }
+    if ($howTo != "yes") {echo "checked = checked";
+    }
     ?></td>
 
 
@@ -200,15 +185,15 @@ $status = $newrow['status'];
 
 <script>
 
-	$(document).ready(function () {
+	    $(document).ready(function () {
     $('.delete').click(function () {
         var deleteyes = prompt('Type YES to delete repair ID ' +<?php echo $id; ?>);
         if (deleteyes == 'YES') {
 		window.location.replace("delete.php?id="+<?php echo $id; ?>
-			);
-			}
-			});
-			});
+            );
+            }
+            });
+            });
 
 </script>
 
