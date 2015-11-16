@@ -18,9 +18,9 @@
 
     include ("../mysql_connect.php");
 
-    if (!isset($_SESSION['user'])) {
-        echo "<h2>Please Login</h2>";
-        echo "<form action = login.php method = post>
+    if (($_SESSION['admin'] < 2)) {
+        echo "<h2>Please Login as an administrator</h2>";
+        echo "<form action = ../login.php method = post>
 	<b>Name: </b><input type = text name = username>
 	<b>Password: </b><input type = password name = password>
 	<input type = submit name = submit value = Submit>

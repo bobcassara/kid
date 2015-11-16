@@ -309,6 +309,7 @@ table#mainTable td {
 .nav_left {
     float: left;
     font-size: 20px;
+    border:2px solid #115db2;
     background-color: #ccc;
 }
 .adminTable {
