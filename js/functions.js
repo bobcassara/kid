@@ -1,7 +1,7 @@
 $(document).ready(function() {
-    
+
     //Get ticket number for success
-    
+
     $('.successLink').click(function() {
         repairid = $(this).attr('rel');
         var ticket = prompt("Enter Ticket Number");
@@ -156,11 +156,30 @@ $(document).ready(function() {
     //Hide Extras on search form
 
     $('#more').click(function() {
-        $('#addNew').fadeToggle(500);
-        $('#admin').fadeToggle(500);
+
+        var expand = $.cookie("more");
+        console.log(expand);
+        if (expand == "") {
+            $.cookie("more", "hidden");
+        } else {
+            $.cookie("more", "");
+        }
+
+        //$('#addNew').fadeToggle(500);
+        //$('#admin').fadeToggle(500);
         $('.ticketTextBox').fadeToggle(500);
         $('.hidden').fadeToggle(500);
         $('.suggestion').fadeToggle(500);
+        location.reload();
+        //$("more").toggleClass("hidden");
+        //$(more).toggleClass("expanded");
+        //if ($(more).hasClass("expanded")){
+        //   document.cookie="more=hidden";
+        //   console.log("hidden");
+        //}else{
+        //    document.cookie="more=nothidden";
+        //    console.log("nothidden");
+
     });
 
     //Hide Models when over 100
@@ -173,27 +192,34 @@ $(document).ready(function() {
 
     var cat = $('.category').val();
     if (cat !== "%") {
-        $('.category').css("background-color", "#CCFFCC");
+        $('.category').css("background-color", "#ffff99");
+
     }
     var mod = $('.modelTextBox').val();
     if (mod !== "") {
-        $('.modelTextBox').css("background-color", "#CCFFCC");
+        $('.modelTextBox').css("background-color", "#ffff99");
     }
     var tik = $('.resizedTextBox').val();
     if (tik !== "") {
-        $('.resizedTextBox').css("background-color", "#CCFFCC");
+        $('.resizedTextBox').css("background-color", "#ffff99");
     }
     var prob = $('.problem').val();
     if (prob !== "") {
-        $('.problem').css("background-color", "#CCFFCC");
+        $('.problem').css("background-color", "#ffff99");
     }
     var sol = $('.solutions').val();
     if (sol !== "%") {
-        $('.solutions').css("background-color", "#CCFFCC");
+        $('.solutions').css("background-color", "#ffff99");
     }
     var sug = $('.suggestion').val();
     if (sug !== "") {
-        $('.suggestion').css("background-color", "#CCFFCC");
+        $('.suggestion').css("background-color", "#ffff99");
+    }
+    var sug = $('.status').val();
+    console.log("suggest:" + sug);
+    if (sug !== "%") {
+        $('.status').css("background-color", "#ffff99");
+
     }
 
     /////////Admin
@@ -240,7 +266,7 @@ $(document).ready(function() {
             $(this).find('input').keypress(function(e) {
                 // Enter pressed?
                 if (e.which === 10 || e.which === 13) {
-                    
+
                     e.preventDefault();
                     $('#updateButton').click();
                 }
@@ -266,4 +292,5 @@ $(document).ready(function() {
 
     $('table#mainTable tr:even').css("background-color", "#ccc");
 
-});//End DocReady
+});
+//End DocReady

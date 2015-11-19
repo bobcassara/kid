@@ -10,6 +10,8 @@ session_start();
 		<title>KID Knowledge Database</title>
 		<link href="css/style.css" rel="stylesheet" type="text/css" />
 		<script src="js/jquery-2.1.3.min.js"></script>
+		<script src="js/jquery.cookie.js"></script>
+
 		<script src="js/functions.js"></script>
 
 	</head>
@@ -34,6 +36,13 @@ session_start();
         $imageC = "";
         $id = NULL;
         $name = NULL;
+        $more = "hidden";
+
+        if (!isset($_COOKIE['more'])) {
+            setcookie(more, hidden);
+        }
+        $more = $_COOKIE['more'];
+
         //Error Reporting
         //error_reporting(0);
         ini_set('display_errors', 1);
@@ -370,10 +379,12 @@ session_start();
 				</div></td>
 
 			</tr>
-			<tr>
-
+			
+			<!--Extras Row-->
+			
+			<tr class="darkGray">
 				<td>
-				<input type="button" value="+" id="more">
+				<input type="button" value="+" class" nonhidden" name="more" id="more">
 				</td>
 				<td>
 				<div style="text-align:center;">
@@ -394,21 +405,28 @@ session_start();
                 }
 				?>
 				<!--Status-->
-
-				<td class = "hidden"><b>Status: </b>
-				<select name="status" size="1">
+				<td class = <?php echo $more; ?> ><b>Status: </b>
+				<select name="status" size="1" class="status">
 					<option value="%">ALL</option>
 					<?php
                     for ($z = 0; $z < $statusnumrows; $z++) {
-                        echo "<option value = '" . $StatusId[$z] . "'>" . $Status[$z] . "</option>";
-                        echo $z;
+                        //    echo "<option value = '" . $StatusId[$z] . "'>" . $Status[$z] . "</option>";
+                        //   echo $z;
+
+                        if ($status == $StatusId[$z]) {
+                            echo "<option selected = 'selected' value ='" . $StatusId[$z] . "'>" . $Status[$z] . "</option>";
+                        } else {
+                            echo "<option value = '" . $StatusId[$z] . "'>" . $Status[$z] . "</option>";
+                            echo $z;
+                        }
+
                     }
 					?>
 				</select></td>
 
 				<!--Author-->
 
-				<td class = "hidden"><b>Author:</b>
+				<td class = <?php echo $more; ?>><b>Author:</b>
 				<select name="enteredBy">
 					<option value="%">ANYONE</option>
 					<?php
@@ -419,16 +437,16 @@ session_start();
 					?>
 				</select></td>
 				<td>
-				<div class = "ticketTextBox">
+				<div class = <?php echo $more; ?>>
 					<strong>Ticket:</strong>
 					<!--Ticket-->
 
-					<input type="text" class="ticketTextBox" name="ticket" value="<?php echo preg_replace("/[%]/", "", $ticket); ?>">
+					<input type="text" class=<?php echo $more; ?> name="ticket" value="<?php echo preg_replace("/[%]/", "", $ticket); ?>">
 				</div></td>
 
 				<!--Solution-->
 				<td>
-				<div class="suggestion" style="text-align:center;">
+				<div class=<?php echo $more; ?> style="text-align:center;">
 					<strong>Suggestion:</strong>
 					<input name="solution"  type="text" value = "<?php echo preg_replace("/[%]/", "", $solution); ?>">
 				</div></td>
@@ -496,7 +514,8 @@ session_start();
 		AND category LIKE '$category'
 		AND subCat LIKE '$subCat'
 		AND problem LIKE '$problem'
-		ORDER BY `success` DESC";
+		ORDER BY `success` DESC
+        LIMIT 3000";
             //Put success on top
         }
         $result = mysqli_query($connection, $query);

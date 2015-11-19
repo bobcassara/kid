@@ -257,21 +257,25 @@ table#mainTable td {
 #reset {
     height: 50px;
 }
-#addNew {
-    display: none;
-}
-#admin {
-    display: none;
-}
+/*#addNew {
+ display: none;
+ }*/
+/*#admin {
+ display: none;
+ }*/
 .suggestion {
     display: none;
 }
 .hidden {
     display: none;
 }
+tr.darkGray {
+    height: 60px;
+    border-top: 0px solid black;
+}
 .button {
     font-family: Tahoma;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: bold;
     color: #115db2;
     padding-top: 3px;
@@ -282,6 +286,10 @@ table#mainTable td {
     /*border-right-width-value: 1px;*/
     border-bottom-width: 1px;
     /*border-left-width-value: 1px;*/
+    border-left-width: 1px;
+    /*border-right-width-value: 1px;*/
+    border-left-style: solid;
+    /*border-right-style-value: solid;*/
     border-top-style: solid;
     /*border-right-style-value: solid;*/
     border-bottom-style: solid;
@@ -289,6 +297,10 @@ table#mainTable td {
     border-top-color: #115db2;
     /*border-right-color-value: #115db2;*/
     border-bottom-color: #115db2;
+    /*border-left-color-value: #115db2;*/
+    border-left-color: #115db2;
+    /*border-right-color-value: #115db2;*/
+    border-right-color: #115db2;
     /*border-left-color-value: #115db2;*/
     border-image-source: none;
     border-image-slice: 100% 100% 100% 100%;
@@ -300,6 +312,7 @@ table#mainTable td {
     background-position: center bottom;
     background-color: #fefefe;
     height: 25px;
+    width: 150px;
 }
 .button:hover {
     background-image: none;
@@ -309,7 +322,7 @@ table#mainTable td {
 .nav_left {
     float: left;
     font-size: 20px;
-    border:2px solid #115db2;
+    border: 2px solid #115db2;
     background-color: #ccc;
 }
 .adminTable {
