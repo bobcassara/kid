@@ -83,7 +83,8 @@
 
                     echo "<tr><td>" . $row['name'] . "</td><td>";
                     echo $row['username'] . "</td><td>";
-                    echo $row['password'] . "</td></tr>";
+                    echo $row['password'] . "</td><td>";
+                    echo $row['lastLog'] . "</td></tr>";
                 }
 
             }

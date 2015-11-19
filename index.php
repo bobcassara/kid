@@ -498,7 +498,8 @@ session_start();
         //If id is set then display that row
 
         if (isset($id)) {
-            if ($id == 0) {echo "<h3 align=center>Welcome " . $_SESSION['name'] . "</h3>";
+            if ($id == 0) {echo "<h3 align=center>Welcome " . $_SESSION['name'] . "</h3>
+            <b>Last Login " . $_COOKIE['lastLog'] . "</b>";
             }
             $query = "SELECT * FROM sharp WHERE id ='$id'";
         } else {

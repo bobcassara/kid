@@ -22,7 +22,7 @@ if ($password == "") {
 $query = "SELECT * FROM staff WHERE username = '$username'";
 $result = mysqli_query($connection, $query);
 $row = $result -> fetch_assoc();
-
+setcookie('lastLog' , $row['lastLog']);
 if (($password != "") && ($password == $row['password'])) {
     //Your golden
 
@@ -35,6 +35,12 @@ if (($password != "") && ($password == $row['password'])) {
     $_SESSION['user'] = $row['username'];
     $_SESSION['name'] = $row['name'];
 
+    //Record login
+    
+    $query = "UPDATE staff SET lastLog = NOW() WHERE username = '$username'";
+    mysqli_query($connection,$query)or die(mysqli_error($connection));
+    
+    
     header('location:index.php?submit=true&id=0');
 
 } else {//wrong credentials provided
