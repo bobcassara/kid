@@ -11,9 +11,9 @@ session_start();
 		<link href="css/style.css" rel="stylesheet" type="text/css" />
 		<script src="js/jquery-2.1.3.min.js"></script>
 		<script src="js/jquery.cookie.js"></script>
-
-		<script src="js/functions.js"></script>
-
+        <script src="js/functions.js"></script>
+        
+        </script>
 	</head>
 
 	<body>
@@ -23,7 +23,9 @@ session_start();
 
 			<meta http-equiv="refresh" content="0; url=nojavascript.html" />
 		</noscript>
-
+    
+		
+		
 		<?php
 
         //init variables
@@ -657,6 +659,7 @@ session_start();
         // Closing connection
         mysqli_close($connection);
 			?>
-
+	
+	
 	</body>
 </html>

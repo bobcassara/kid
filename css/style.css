@@ -311,7 +311,7 @@ td.darkGray {
     border-image-width: 1 1 1 1;
     border-image-outset: 0 0 0 0;
     border-image-repeat: stretch stretch;
-    background-image: url("images/button_bg.gif");
+    background-image: url("../images/button_bg.gif");
     background-repeat: repeat-x;
     background-position: center bottom;
     background-color: #fefefe;
