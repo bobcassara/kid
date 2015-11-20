@@ -38,9 +38,12 @@ session_start();
         $name = NULL;
         $more = "hidden";
 
+        //Set cookie for displaying extras bar
+
         if (!isset($_COOKIE['more'])) {
             setcookie(more, hidden);
         }
+
         $more = $_COOKIE['more'];
 
         //Error Reporting
@@ -269,7 +272,7 @@ session_start();
 
 				<td>
 				<div style="text-align:center;">
-					<input type="text" class = "modelTextBox" name="model" value = "<?php echo preg_replace("/[%]/", "", $model); ?>">
+					<input type="text" class = "modelTextBox" placeholder = " example M264" name="model" value = "<?php echo preg_replace("/[%]/", "", $model); ?>">
 				</div></td>
 
 				<!--Model Solutions-->
@@ -375,83 +378,87 @@ session_start();
 				<!--Problem-->
 				<td>
 				<div style="text-align:center;">
-					<input name="problem" class="problem" type="text" value = "<?php echo preg_replace("/[%]/", "", $problem); ?>" >
+					<input name="problem" class="problem" placeholder = "Keyword" type="text" value = "<?php echo preg_replace("/[%]/", "", $problem); ?>" >
 				</div></td>
 
 			</tr>
 			
 			<!--Extras Row-->
-			
-			<tr class="darkGray">
+			<?php
+            if (isset($_SESSION['admin']) AND ($_SESSION['admin'] >= 1)) {
+                echo "<tr class='darkGray'>
 				<td>
-				<input type="button" value="+" class" nonhidden" name="more" id="more">
+				<input type='button' class= 'button' value='More / Less' name='more' id='more'>
 				</td>
 				<td>
-				<div style="text-align:center;">
-					<button class='button' id='addNew'>
-						Add New Content
-					</button>
-				</div></td>
-				<?php
-                if (isset($_SESSION['admin']) AND ($_SESSION['admin'] >= 2)) {
-                    echo "<td>
+				    <div style='text-align:center'>
+			        <center>
+                    <button class='button' id='addNew'>
+                        Add New Content
+                    </button>
+                    </center></td>
+                    </div></td>";
+
+            }
+            if (isset($_SESSION['admin']) AND ($_SESSION['admin'] >= 2)) {
+                echo "<td>
 				<center>
 					<button class='button' id='admin'>
 						Admin
 					</button>
 				</center></td>";
-                } else {
-                    echo "<td></td>";
-                }
-				?>
-				<!--Status-->
-				<td class = <?php echo $more; ?> ><b>Status: </b>
-				<select name="status" size="1" class="status">
-					<option value="%">ALL</option>
-					<?php
-                    for ($z = 0; $z < $statusnumrows; $z++) {
-                        //    echo "<option value = '" . $StatusId[$z] . "'>" . $Status[$z] . "</option>";
-                        //   echo $z;
+            } else {
+                echo "<td></td>";
+            }
+            if (isset($_SESSION['admin']) AND ($_SESSION['admin'] >= 1)) {
+                echo "<td>
+				    <div class = " . $more . " ><b>Status: <br /></b>
+				<select name='status' size='1' class='status'>
+					<option value='%'>ALL</option>";
 
-                        if ($status == $StatusId[$z]) {
-                            echo "<option selected = 'selected' value ='" . $StatusId[$z] . "'>" . $Status[$z] . "</option>";
-                        } else {
-                            echo "<option value = '" . $StatusId[$z] . "'>" . $Status[$z] . "</option>";
-                            echo $z;
-                        }
-
+                for ($z = 0; $z < $statusnumrows; $z++) {
+                    if ($status == $StatusId[$z]) {
+                        echo "<option selected = 'selected' value ='" . $StatusId[$z] . "'>" . $Status[$z] . "</option>";
+                    } else {
+                        echo "<option value = '" . $StatusId[$z] . "'>" . $Status[$z] . "</option>";
+                        echo $z;
                     }
-					?>
-				</select></td>
+
+                }
+
+                echo "</select></div></td>
 
 				<!--Author-->
 
-				<td class = <?php echo $more; ?>><b>Author:</b>
-				<select name="enteredBy">
-					<option value="%">ANYONE</option>
-					<?php
-                    for ($i = 0; $i < $staffnumrows; $i++) {
-                        echo "<option value = '" . $staffID[$i] . "'>" . $staff[$i] . "</option>";
-                        echo $i;
-                    }
-					?>
-				</select></td>
 				<td>
-				<div class = <?php echo $more; ?>>
-					<strong>Ticket:</strong>
+				    <div class = " . $more . "><b>Author:<br /></b>
+				<select name='enteredBy'>
+					<option value='%'>ANYONE</option>";
+
+                for ($i = 0; $i < $staffnumrows; $i++) {
+                    echo "<option value = '" . $staffID[$i] . "'>" . $staff[$i] . "</option>";
+                    echo $i;
+                }
+
+                echo "</select></div></td>
+				<td>
+				<div class = " . $more . " >
+					<strong>Ticket:<br /></strong>
 					<!--Ticket-->
 
-					<input type="text" class=<?php echo $more; ?> name="ticket" value="<?php echo preg_replace("/[%]/", "", $ticket); ?>">
+					<input type='text' class=" . $more . " name='ticket' placeholder = 'TAC Ticket' value=" . preg_replace("/[%]/", "", $ticket) . ">
 				</div></td>
 
 				<!--Solution-->
 				<td>
-				<div class=<?php echo $more; ?> style="text-align:center;">
-					<strong>Suggestion:</strong>
-					<input name="solution"  type="text" value = "<?php echo preg_replace("/[%]/", "", $solution); ?>">
+				<div class=" . $more . ">
+					<strong>Suggestion:<br /></strong>
+					<input name='solution'  type='text' placeholder = 'Search suggestions' value = " . preg_replace("/[%]/", "", $solution) . ">
 				</div></td>
 
-			</tr>
+			</tr>";
+            }
+			 ?>
 		</table><!--/Search Table-->
 
 		<!--/MainWindow-->
