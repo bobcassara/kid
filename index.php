@@ -400,7 +400,7 @@ session_start();
                     </div></td>";
 
             }
-            if (isset($_SESSION['admin']) AND ($_SESSION['admin'] >= 2)) {
+            if (isset($_SESSION['admin']) AND ($_SESSION['admin'] >= 3)) {
                 echo "<td>
 				<center>
 					<button class='button' id='admin'>
@@ -636,7 +636,7 @@ session_start();
 				<tr>
 					";
             }
-            if (isset($_SESSION['admin'])) {//provide edit link to admins
+            if (isset($_SESSION['admin'])&&($_SESSION['admin'] >= 2)) {//provide edit link to admins
                 echo "<td style='width:30px'><a href='editForm.php?id=" . $row['id'] . "'><img src='images/pencil.png' width='20'></a></td>";
             } else {
                 echo "<td width = 25></td>";
