@@ -17,14 +17,11 @@ session_start();
 	</head>
 
 	<body>
-		<!--Javascript enabled??-->
+		<!--Javascript not enabled?? Redirect-->
 
 		<noscript>
-
 			<meta http-equiv="refresh" content="0; url=nojavascript.html" />
 		</noscript>
-    
-		
 		
 		<?php
 
@@ -418,12 +415,12 @@ session_start();
 				<select name='status' size='1' class='status'>
 					<option value='%'>ALL</option>";
 
-                for ($z = 0; $z < $statusnumrows; $z++) {
-                    if ($status == $StatusId[$z]) {
-                        echo "<option selected = 'selected' value ='" . $StatusId[$z] . "'>" . $Status[$z] . "</option>";
+                for ($i = 0; $i < $statusnumrows; $i++) {
+                    if ($status == $StatusId[$i]) {
+                        echo "<option selected = 'selected' value ='" . $StatusId[$i] . "'>" . $Status[$i] . "</option>";
                     } else {
-                        echo "<option value = '" . $StatusId[$z] . "'>" . $Status[$z] . "</option>";
-                        echo $z;
+                        echo "<option value = '" . $StatusId[$i] . "'>" . $Status[$i] . "</option>";
+                        //echo $i;
                     }
 
                 }
