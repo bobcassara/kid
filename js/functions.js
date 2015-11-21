@@ -156,30 +156,19 @@ $(document).ready(function() {
     //Hide Extras on search form
 
     $('#more').click(function() {
-
         var expand = $.cookie("more");
-        console.log(expand);
         if (expand == "") {
             $.cookie("more", "hidden");
         } else {
             $.cookie("more", "");
         }
-
         //$('#addNew').fadeToggle(500);
         //$('#admin').fadeToggle(500);
         $('.ticketTextBox').fadeToggle(500);
         $('.hidden').fadeToggle(500);
         $('.suggestion').fadeToggle(500);
         location.reload();
-        //$("more").toggleClass("hidden");
-        //$(more).toggleClass("expanded");
-        //if ($(more).hasClass("expanded")){
-        //   document.cookie="more=hidden";
-        //   console.log("hidden");
-        //}else{
-        //    document.cookie="more=nothidden";
-        //    console.log("nothidden");
-
+        //reload page to relect changes
     });
 
     //Hide Models when over 100
@@ -216,13 +205,31 @@ $(document).ready(function() {
         $('.suggestion').css("background-color", "#ffff99");
     }
     var sug = $('.status').val();
-    console.log("suggest:" + sug);
+
     if (sug !== "%") {
         $('.status').css("background-color", "#ffff99");
 
     }
+    //Enter Pressed - Then submit form
 
-    /////////Admin
+    $('.problem').keypress(function(event) {
+        if (event.which == 13 || event.which == 10) {
+            event.preventDefault();
+            $('#updateButton').click();
+        }
+    });
+
+    //ThumbsDown
+
+    $('#adminThumbsDown').click(function() {
+        window.location.href = "thumbsDown.php";
+        return false;
+    });
+    //odd columns
+
+    $('table#mainTable tr:even').css("background-color", "#ccc");
+
+    /////////Admin Functions/////////////////////////////
 
     //Home
 
@@ -251,29 +258,7 @@ $(document).ready(function() {
         window.location.href = "successByAgent.php";
         return false;
     });
-
-    //ThumbsDown
-
-    $('#adminThumbsDown').click(function() {
-        window.location.href = "thumbsDown.php";
-        return false;
-    });
-
-    //Enter Pressed - Then submit form
-
-    $(function() {
-        $('form').each(function() {
-            $(this).find('input').keypress(function(e) {
-                // Enter pressed?
-                if (e.which === 10 || e.which === 13) {
-
-                    e.preventDefault();
-                    $('#updateButton').click();
-                }
-            });
-        });
-    });
-
+    
     //No Success
 
     $('#thumbsDown').click(function() {
@@ -287,10 +272,5 @@ $(document).ready(function() {
             window.location.replace(url + "&ticket=" + ticket);
         }
     });
-
-    //odd columns
-
-    $('table#mainTable tr:even').css("background-color", "#ccc");
-
 });
 //End DocReady
