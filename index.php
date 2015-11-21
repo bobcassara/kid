@@ -638,13 +638,15 @@ session_start();
 				<tr>
 					";
             }
-            if (isset($_SESSION['admin'])&&($_SESSION['admin'] >= 2)) {//provide edit link to admins
+            if (isset($_SESSION['admin']) && ($_SESSION['admin'] >= 2) || ($_SESSION['name'] == $newstaff)) {//provide edit link to admins or authors
                 echo "<td style='width:30px'><a href='editForm.php?id=" . $row['id'] . "'><img src='images/pencil.png' width='20'></a></td>";
             } else {
                 echo "<td width = 25></td>";
             }
 
-            echo "<td width=40>" . $row['ticket'] . "</td><td>" . $newstaff . "</td><td>" . $row['date'] . "</td><td>" . $row['category'] . "</td><td>" . $row['subCat'] . "</td><td>" . $model1 . "</td><td>" . $row['problem'] . "</td><td>" . $row['solution'] . "</td><td>" . $row['success'] . "&nbsp;<a href='#'class='successLink' rel='" . $row['id'] . "'><img src='images/thumbsup.png' width='25'/></a></td>
+            echo "<td width=40>" . $row['ticket'] . "</td><td>" . $newstaff . "</td><td>" . $row['date'] . "</td><td>" . $row['category'] . "</td><td>" . $row['subCat'] . "</td><td>" . $model1 . "</td><td>" . $row['problem'] . "</td><td>" . $row['solution'] . "</td><td>" . $row['success'] . "&nbsp;<a href='#'class='successLink' 
+                rel='" . $row['id'] . "'>
+                <img src='images/thumbsup.png' width='25'/></a></td>
 				</tr>";
 
         }
