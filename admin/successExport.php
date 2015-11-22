@@ -3,7 +3,7 @@
 $DB_Server = "localhost"; // MySQL Server
 $DB_Username = "root"; // MySQL Username
 $DB_Password = "xj80e383"; // MySQL Password
-$DB_DBName = "bobble"; // MySQL Database Name
+$DB_DBName = "KID"; // MySQL Database Name
 $DB_TBLName = "success"; // MySQL Table Name
 $xls_filename = 'successExport_'.date('Y-m-d').'.xls'; // Define Excel (.xls) file name
  

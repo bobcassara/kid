@@ -33,7 +33,7 @@
 		</form>";
             exit();
         }
-        $username = $_SESSION['user'];
+        $username = $_SESSION['name'];
         //Init the variables
 
         $category = "";

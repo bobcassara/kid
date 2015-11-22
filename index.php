@@ -61,6 +61,7 @@ session_start();
         } else {
             $ticket = "%";
         }
+  print "TICKET ".$ticket;
         $ticketDisplay = preg_replace("/[%]/", "", $ticket);
         if ($ticketDisplay == "") {$ticketDisplay = "All Tickets";
         }//This is displayed on search bar
@@ -197,7 +198,7 @@ session_start();
             </table>
 
             <hr>
-            <form action="index.php" method="post">
+            <form action="index.php" method="get">
         </header>
         <!--Table Search Area-->
 
@@ -445,7 +446,7 @@ session_start();
                     <strong>Ticket:<br /></strong>
                     <!--Ticket-->
 
-                    <input type='text' class=" . $more . " name='ticket' placeholder = 'TAC Ticket' value=" . preg_replace("/[%]/", "", $ticket) . ">
+                    <input name='ticket' type='text' placeholder = 'TAC Ticket' value=" . preg_replace("/[%]/", "", $ticket) . ">
                 </div></td>
 
                 <!--Solution-->
