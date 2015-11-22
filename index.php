@@ -40,7 +40,7 @@ session_start();
         //Set cookie for displaying extras bar
 
         if (!isset($_COOKIE['more'])) {
-            setcookie(more, hidden);
+            setcookie('more', 'hidden');
         }
 
         $more = $_COOKIE['more'];
@@ -384,10 +384,18 @@ session_start();
             
             <!--Extras Row-->
             <?php
+            
+            //Check hidden row value
+            if ($_COOKIE['more']=="hidden"){
+                $value="Show More";
+            }else{
+                $value="Show Less";
+            }
+            
             if (isset($_SESSION['admin']) AND ($_SESSION['admin'] >= 1)) {
                 echo "<tr class='darkGray'>
                 <td>
-                <input type='button' class= 'button' value='More / Less' name='more' id='more'>
+                <input type='button' class= 'button' value= '".$value."' name='more' id='more'>
                 </td>
                 <td>
                     <div style='text-align:center'>
@@ -445,14 +453,14 @@ session_start();
                     <strong>Ticket:<br /></strong>
                     <!--Ticket-->
 
-                    <input name='ticket' type='text' placeholder = 'TAC Ticket' value=" . preg_replace("/[%]/", "", $ticket) . ">
+                    <input name='ticket' type='text' class='textBox' placeholder = 'TAC Ticket' value=" . preg_replace("/[%]/", "", $ticket) . ">
                 </div></td>
 
                 <!--Solution-->
                 <td>
                 <div class=" . $more . ">
                     <strong>Suggestion:<br /></strong>
-                    <input name='solution'  type='text' placeholder = 'Search suggestions' value = " . preg_replace("/[%]/", "", $solution) . ">
+                    <input name='solution'  type='text' class='textBox' placeholder = 'Search suggestions' value = " . preg_replace("/[%]/", "", $solution) . ">
                 </div></td>
 
             </tr>";

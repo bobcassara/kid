@@ -158,6 +158,10 @@ table#mainTable td {
 #tableReports td {
     padding: 10px;
 }
+.textBox {
+    width:120px;
+}
+
 .calendar {
     font-family: 'Trebuchet MS', Tahoma, Verdana, Arial, sans-serif;
     font-size: 0.9em;

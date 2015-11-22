@@ -156,18 +156,18 @@ $(document).ready(function() {
     //Hide Extras on search form
 
     $('#more').click(function() {
+
         var expand = $.cookie("more");
-        if (expand == "") {
+        if (expand == "show") {
             $.cookie("more", "hidden");
         } else {
-            $.cookie("more", "");
+            $.cookie("more", "show");
         }
-        //$('#addNew').fadeToggle(500);
-        //$('#admin').fadeToggle(500);
         $('.ticketTextBox').fadeToggle(500);
+        console.log('here');
         $('.hidden').fadeToggle(500);
         $('.suggestion').fadeToggle(500);
-        location.reload();
+        location.replace('index.php');
         //reload page to relect changes
     });
 
@@ -258,7 +258,7 @@ $(document).ready(function() {
         window.location.href = "successByAgent.php";
         return false;
     });
-    
+
     //No Success
 
     $('#thumbsDown').click(function() {
