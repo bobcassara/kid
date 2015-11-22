@@ -37,12 +37,12 @@
             }
 
             //Get author from cookie
-            if (isset($_SESSION['user'])) {
-                $author = $_SESSION['user'];
+            if (isset($_SESSION['name'])) {
+                $author = $_SESSION['name'];
             }
-            //TODO convert author to user name
+            
             //The Query
-
+            
             //Update Success table
             $query = "INSERT INTO success VALUES('$ticket', '$id', '$hitsnumrows', '$author', NOW(), NULL)";
             mysqli_query($connection, $query);

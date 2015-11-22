@@ -133,7 +133,7 @@ $status = $newrow['status'];
 <tr>
 	<td>Category:</td>
 	<td><select name="category" type="text" />
-	<option value="%">ALL</option>
+	<!--<option value="%">ALL</option>-->
 	<?php
     for ($i = 0; $i < $categorynumrows; $i++) {
         if ($category == $Category[$i]) {
