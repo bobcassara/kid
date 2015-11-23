@@ -164,11 +164,12 @@ $(document).ready(function() {
             $.cookie("more", "show");
         }
         $('.ticketTextBox').fadeToggle(500);
-        console.log('here');
         $('.hidden').fadeToggle(500);
         $('.suggestion').fadeToggle(500);
+        
+        //reload page to relect changes made to more cookie
         location.replace('index.php');
-        //reload page to relect changes
+        
     });
 
     //Hide Models when over 100

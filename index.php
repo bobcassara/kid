@@ -386,12 +386,13 @@ session_start();
             <?php
             
             //Check hidden row value
-            if ($_COOKIE['more']=="hidden"){
-                $value="Show More";
-            }else{
-                $value="Show Less";
+            if (isset ($_COOKIE['more'])){
+                if ($_COOKIE['more']=="hidden"){
+                    $value="Show More";
+                }else{
+                    $value="Show Less";
+                }
             }
-            
             if (isset($_SESSION['admin']) AND ($_SESSION['admin'] >= 1)) {
                 echo "<tr class='darkGray'>
                 <td>
