@@ -206,10 +206,12 @@ $(document).ready(function() {
         $('.suggestion').css("background-color", "#ffff99");
     }
     var sug = $('.status').val();
-
     if (sug !== "%") {
         $('.status').css("background-color", "#ffff99");
-
+    }
+    var sug = $('.author').val();
+    if (sug !== "%") {
+        $('.author').css("background-color", "#ffff99");
     }
     //Enter Pressed - Then submit form
 
@@ -240,9 +242,10 @@ $(document).ready(function() {
     });
 
     //Authored by staff
-
-    $('#authoredByAgent').click(function() {
-        window.location.href = "authoredByAgent.php";
+    
+    
+    $('#editsByAgent').click(function() {
+        window.location.href = "viewEdits.php";
         return false;
     });
 

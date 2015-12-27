@@ -57,7 +57,7 @@ $modelnumrows = mysqli_num_rows($result);
 
 while ($row = $result -> fetch_assoc()) {
     $Model[] = $row['modelNumber'];
-    $ModelID[] = $row['id'];
+    $ModelID[] = $row['modelId'];
 
 }
 
@@ -69,7 +69,7 @@ $modelcolornumrows = mysqli_num_rows($result);
 
 while ($row = $result -> fetch_assoc()) {
     $ModelColor[] = $row['modelNumber'];
-    $ModelIDColor[] = $row['id'];
+    $ModelIDColor[] = $row['modelId'];
 
 }
 
@@ -81,7 +81,7 @@ $modelbwnumrows = mysqli_num_rows($result);
 
 while ($row = $result -> fetch_assoc()) {
     $ModelBw[] = $row['modelNumber'];
-    $ModelIDBw[] = $row['id'];
+    $ModelIDBw[] = $row['modelId'];
 
 }
 //Model Solutions
@@ -92,7 +92,7 @@ $modelsolutionsnumrows = mysqli_num_rows($result);
 
 while ($row = $result -> fetch_assoc()) {
     $ModelSolutions[] = $row['modelNumber'];
-    $ModelIDSolutions[] = $row['id'];
+    $ModelIDSolutions[] = $row['modelId'];
 
 }
 //Print Codes

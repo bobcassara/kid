@@ -41,15 +41,15 @@ session_start();
 
         if (!isset($_COOKIE['more'])) {
             setcookie('more', 'hidden');
+        }else{
+            $more = $_COOKIE['more'];
         }
-
-        $more = $_COOKIE['more'];
-
         //Error Reporting
         //error_reporting(0);
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
+        
         //Lets Connect to the db
 
         include ("mysql_connect.php");
@@ -184,7 +184,7 @@ session_start();
         <header>
             <table style="width:100%;">
                 <tr>
-                    <td><img style="text-align:left;" src="images/sharp-transparent.png" alt="logo" width="250"/></td>
+                    <td><a href="../"><img style="text-align:left;" src="images/sharp-transparent.png" alt="logo" width="250"/></a></td>
                     <td><div id="loginname"></div>
                     <div style="text-align:center;">
                         <?php
@@ -440,12 +440,16 @@ session_start();
 
                 <td>
                     <div class = " . $more . "><b>Author:<br /></b>
-                <select name='enteredBy'>
+                <select name='enteredBy' class='author'>
                     <option value='%'>ANYONE</option>";
 
                 for ($i = 0; $i < $staffnumrows; $i++) {
+                    if ($enteredBy == $staffID[$i]) {
+                    echo "<option selected = 'selected' value ='" . $staffID[$i] . "'>" . $staff[$i] . "</option>";
+                    }else{
                     echo "<option value = '" . $staffID[$i] . "'>" . $staff[$i] . "</option>";
                     echo $i;
+                }
                 }
 
                 echo "</select></div></td>
@@ -517,6 +521,18 @@ session_start();
             <b>Last Login " . $_COOKIE['lastLog'] . "</b>";
             }
             $query = "SELECT * FROM sharp WHERE id ='$id'";
+            //GET TODO for editor
+            if ($_SESSION['admin']>1){
+                $todoQuery = "SELECT * from sharp WHERE statusId = '1'";
+                $result = mysqli_query($connection, $todoQuery);
+                $totalRows = mysqli_num_rows($result);
+                echo "<br /><br /><table align='center'><tr><td><div style='color:red; font-size:15px; font-weight:bold;'>
+                 You have ". $totalRows. " new SUBMITTED entrties to process</div></td><td> 
+                <a href='index.php?submit=Upsate&status=1'><img src='images/view-new.jpg' width='125'></a>
+                <a href='viewEdits.php'><img src='images/view-all.jpg' width='125'></a>
+                </tr>
+                </table></div>";
+            }
         } else {
 
             // Perform SQL query
@@ -546,8 +562,15 @@ session_start();
         }
         if (($totalRows == 0) AND ($submitted == "true") AND ($id != 0)) {echo "
         <table align = center>
-            <tr>
-                <td style = 'color:black; text-align:right;' colspan = 2><b>Solution was not found in databse &nbsp;</b><a href='#' id='thumbsDown'><img src='images/thumbsdown.png' width = '25'></a></td>
+            <tr>";
+            if ($_SESSION['admin']>=1) {
+                
+                echo "<td style = 'color:black; text-align:right;' colspan = 2>
+                <b>Solution was not found in databse &nbsp;</b><a href='#' id='thumbsDown'><img src='images/thumbsdown.png' width = '25'></a>";
+                }else{
+                    echo "<td colspan='2'></td>";
+                }
+            echo "</td>
             </tr>
         </table>
         ";
@@ -573,12 +596,15 @@ session_start();
                 <col >
                 <col style='width:5%'>
             </colgroup>
-            <tr>
-                <td style = 'color:black; text-align:right;' colspan = 10>Solution was not found in database &nbsp;<a href='#' id='thumbsDown'><img src='images/thumbsdown.png' width = '25'></a></td>
-            </tr>
+            <tr>";
+            if ($_SESSION['admin']>0){
+                echo "<td style = 'color:black; text-align:right;' colspan = 10>Solution was not found in database &nbsp;<a href='#' id='thumbsDown'><img src='images/thumbsdown.png' width = '25'></a></td>";
+            }
+            
+            echo "</tr>
             <tr>
                 <td></td>
-                <td>Ticket</div></td>
+                <td>Status</div></td>
                 <td>Author</div></td>
                 <td>Date</div></td>
                 <td>Category</div></td>
@@ -622,8 +648,10 @@ session_start();
                 $newstatus = $newrow['status'];
             } else { $newstatus = "";
             }
-            $staffnumber = $row['staffId'];
-            $newstaff = $staff[$staffnumber - 1];
+            
+            $staffnumber = $row['staffId'] -1;
+            if ($staffnumber <0) $staffnumber=0;//TODO Why do I need to do this?
+            $newstaff = $staff[$staffnumber];
 
             if (strlen($row['model']) > 100) {//Lots of models hide unless needed
                 $model1 = "
@@ -636,7 +664,7 @@ session_start();
             } else {
                 $model1 = $row['model'];
             }
-            if ($row['howTo'] === "yes") {echo "
+            if (($row['howTo'] === "yes")||($row['howTo'] === "Yes")) {echo "
                 <tr class='howTo'>
                     ";
             } else {
@@ -644,16 +672,34 @@ session_start();
                 <tr>
                     ";
             }
+            
+            //Get Status from statusId
+            
+            $statusQuery = "SELECT * FROM status WHERE statusId = ".$row['statusId'];
+                $statusResult = mysqli_query($connection, $statusQuery);
+                $statusRow = $statusResult -> fetch_assoc();
+                $statusName = $statusRow['status'];
+            
+            
             if (isset($_SESSION['admin']) && ($_SESSION['admin'] >= 2) || ($_SESSION['name'] == $newstaff)) {//provide edit link to admins or authors
                 echo "<td style='width:30px'><a href='editForm.php?id=" . $row['id'] . "'><img src='images/pencil.png' width='20'></a></td>";
             } else {
                 echo "<td width = 25></td>";
             }
 
-            echo "<td width=40>" . $row['ticket'] . "</td><td>" . $newstaff . "</td><td>" . $row['date'] . "</td><td>" . $row['category'] . "</td><td>" . $row['subCat'] . "</td><td>" . $model1 . "</td><td>" . $row['problem'] . "</td><td>" . $row['solution'] . "</td><td>" . $row['success'] . "&nbsp;<a href='#'class='successLink' 
+            echo "<td width=40>" . $statusName . "</td><td>" . $newstaff . "</td><td>" . $row['date'] . "</td><td>" . $row['category'] . 
+            "</td><td>" . $row['subCat'] . "</td><td>" . $model1 . "</td><td>" . $row['problem'] . 
+            "</td><td>" . $row['solution'] . "</td><td>" . $row['success'] . 
+            "&nbsp;<a href='#'class='successLink' 
                 rel='" . $row['id'] . "'>
-                <img src='images/thumbsup.png' width='25'/></a></td>
-                </tr>";
+                ";
+                if ($_SESSION['admin']>0){
+                echo "<img src='images/thumbsup.png' width='25'/></a></td>";
+            }else{
+                echo "</a></td>";
+                
+               } 
+             echo"</tr>";
 
         }
         echo "

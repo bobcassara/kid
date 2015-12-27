@@ -64,11 +64,11 @@ if(!isset($_SESSION['user'])) {
 
 <tr>
 <td>Model(s):<br><br><br><small>(Hold CTRL<br>to select<br>multiple models)</small></td>
-<td><select multiple name="model[]" size = "30" type="text" id = "model" />
+<td><select multiple name="modelId[]" size = "30" type="text" id = "model" />
 	
 	<?php
 	for ($i=0; $i< $modelnumrows; $i++) {
-    echo "<option value = '". $Model[$i] . "'>". $Model[$i] . "</option>";
+    echo "<option value = '". $ModelID[$i] . "'>". $Model[$i] . "</option>";
 }
     ?></select></td>
 </tr>
