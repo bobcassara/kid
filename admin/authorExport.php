@@ -16,11 +16,11 @@ $enddate  = $_SESSION['enddate'];
 /***** DO NOT EDIT BELOW LINES *****/
 // Create MySQL connection
 $sql = "SELECT sharp.id, sharp.ticket, sharp.model, sharp.problem, sharp.solution, sharp.date, staff.name FROM sharp INNER JOIN staff ON sharp.staffId=staff.staffId WHERE sharp.date BETWEEN'$startdate' AND '$enddate'";
-$Connect = @mysql_connect($DB_Server, $DB_Username, $DB_Password) or die("Failed to connect to MySQL:<br />" . mysql_error() . "<br />" . mysql_errno());
+$Connect = @mysqli_connect($DB_Server, $DB_Username, $DB_Password) or die("Failed to connect to MySQL:<br />" . mysqli_error() . "<br />" . mysqli_errno());
 // Select database
-$Db = @mysql_select_db($DB_DBName, $Connect) or die("Failed to select database:<br />" . mysql_error(). "<br />" . mysql_errno());
+$Db = @mysqli_select_db($Connect, $DB_DBName) or die("Failed to select database:<br />" . mysqli_error(). "<br />" . mysqli_errno());
 // Execute query
-$result = @mysql_query($sql,$Connect) or die("Failed to execute query:<br />" . mysql_error(). "<br />" . mysql_errno());
+$result = @mysqli_query($Connect,$sql) or die("Failed to execute query:<br />" . mysqli_error(). "<br />" . mysqli_errno());
  
 // Header info settings
 header("Content-Type: application/xls");
@@ -33,17 +33,18 @@ header("Expires: 0");
 $sep = "\t"; // tabbed character
  
 // Start of printing column names as names of MySQL fields
-for ($i = 0; $i<mysql_num_fields($result); $i++) {
-  echo mysql_field_name($result, $i) . "\t";
-}
+//for ($i = 0; $i<mysql_num_fields($result); $i++) {
+  //echo mysql_field_name($result, $i) . "\t";
+//}
+print "-ID- \t Ticket \t Model(s) \t Symthom \t Suggestion \t Date \t Author";
 print("\n");
 // End of printing column names
  
 // Start while loop to get data
-while($row = mysql_fetch_row($result))
+while($row = mysqli_fetch_row($result))
 {
   $schema_insert = "";
-  for($j=0; $j<mysql_num_fields($result); $j++)
+  for($j=0; $j<mysqli_num_fields($result); $j++)
   {
     
     if(!isset($row[$j])) {

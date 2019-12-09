@@ -7,6 +7,12 @@
 	<script src="js/gen_validatorv4.js" type="text/javascript"></script>
 	<script src="js/jquery-2.1.3.min.js"></script>
 	<script src="js/functions.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="js/multiselect.min.js"></script>
+	
+<link type="text/css" href="../jquery-picklist.css" rel="stylesheet" />
+<!--[if IE 7]><link href="../jquery-picklist-ie7.css" rel="stylesheet" type="text/css" /><![endif]-->
+	
 </head>
 </head>
 <body>
@@ -32,7 +38,7 @@ if(!isset($_SESSION['user'])) {
 }
 ?>
 
-<form method='GET' action='newFormHandler.php' id="editForm">
+<form method='POST' action='newFormHandler.php' id="editForm">
 <br>
 
 <table width="100%" border="0">
@@ -49,7 +55,7 @@ if(!isset($_SESSION['user'])) {
 
 <!--ENtered By-->
 <tr>
-<td>Author:</td>
+<td width="100px">Author:</td>
 <td><?php echo $name;?></td>
 </tr>
 
@@ -60,23 +66,134 @@ if(!isset($_SESSION['user'])) {
 <td><input type=text name=ticket value=""id = "ticket"></td>
 </tr>
 
-<!--Model-->
+
+
+<!------------------------------------->
+<tr>
+	<td>Select Model Type:</td>
+	<td><select name="modelType" required>
+	<option value="">Select</option>
+	<option value="All">All</option>
+	<option value="MX Series">MX Series</option>
+	<Option Value="Solutions">Solutions</Option>
+</select>
+</td>
+	
+	</tr>
+<!--MX Model-->
+<tr>
+	<td class = "mxModels">Models:<br>(use arrow buttons)</td>
+	<td class = "mxModels">
+<div class="row">
+        <div class="left-column">
+        	<b>MX Models:</b>
+            <select name="from[]" id="multiselect" class="form-control" size="20" multiple="multiple" style="width:225px">
+                <?php
+				for ($i=0; $i< $modelnumrows; $i++) {
+					if ((strpos($Model[$i], 'MX-') !== false)AND($ModelFamily[$i]!='Solution')) {
+    			echo "<option value = '". $ModelID[$i] . "'>".$Model[$i]  . "&nbsp; &nbsp; (".$ModelFamily[$i].")</option>";
+				}
+				}
+            ?></select>
+        </div>
+        <div class="button-column">
+            <br><br><br><br>
+            <button type="button" id="multiselect_rightAll" class="btn">>></button>
+            <button type="button" id="multiselect_rightSelected" class="btn"><i class="glyphicon glyphicon-chevron-right"></i>></button>
+            <button type="button" id="multiselect_leftSelected" class="btn"><i class="glyphicon glyphicon-chevron-left"></i><</button>
+            <button type="button" id="multiselect_leftAll" class="btn"><i class="glyphicon glyphicon-backward"></i><<</button>
+        </div>
+        
+        <div class="right-column">
+        	<b>Selected Models:</b>
+            <select name="modelId[]" id="multiselect_to" class="form-control" size="20" multiple="multiple" style="width:225px"></select>
+        </div>
+    </div>
+
+<!--All Models-->
 
 <tr>
-<td>Model(s):<br><br><br><small>(Hold CTRL<br>to select<br>multiple models)</small></td>
-<td><select multiple name="modelId[]" size = "30" type="text" id = "model" />
-	
-	<?php
-	for ($i=0; $i< $modelnumrows; $i++) {
-    echo "<option value = '". $ModelID[$i] . "'>". $Model[$i] . "</option>";
-}
-    ?></select></td>
-</tr>
+	<td class = "allModels">Models:<br>(Use arrow buttons<br />to move desired<br /> models to the<br />Selected Models box.)</td>
+	<td class = "allModels">
+<div class="row">
+        <div class="left-column">
+        	<b>Models:</b>
+            <select name="from[]" id="allmultiselect" class="form-control" size="20" multiple="multiple" style="width:225px">
+                <?php
+				for ($i=0; $i< $modelnumrows; $i++) {
+					
+    			echo "<option value = '". $ModelID[$i] . "'>".$Model[$i]  . "&nbsp; &nbsp; (".$ModelFamily[$i].")</option>";
+				
+				}
+            ?></select>
+        </div>
+        <div class="button-column">
+            <br><br><br><br>
+            <button type="button" id="allmultiselect_rightAll" class="btn"><i class="glyphicon glyphicon-forward"></i>>></button>
+            <button type="button" id="allmultiselect_rightSelected" class="btn"><i class="glyphicon glyphicon-chevron-right"></i>></button>
+            <button type="button" id="allmultiselect_leftSelected" class="btn"><i class="glyphicon glyphicon-chevron-left"></i><</button>
+            <button type="button" id="allmultiselect_leftAll" class="btn"><i class="glyphicon glyphicon-backward"></i><<</button>
+        </div>
+        
+        <div class="right-column">
+        	<b>Selected Models:</b>
+            <select name="modelId[]" id="allmultiselect_to" class="form-control" size="20" multiple="multiple" style="width:225px"></select>
+        </div>
+    </div>
+
+<!--Solution Model-->
+<tr>
+	<td class = "solutionModels">Models:<br>(use arrow buttons)</td>
+	<td class = "solutionModels">
+<div class="row">
+        <div class="left-column">
+        	<b>Solutions:</b>
+            <select name="from[]" id="solutionmultiselect" class="form-control" size="20" multiple="multiple" style="width:225px">
+                <?php
+				for ($i=0; $i< $modelnumrows; $i++) {
+					if ($ModelFamily[$i]=='Solution') {
+    			echo "<option value = '". $ModelID[$i] . "'>".$Model[$i]  . "&nbsp; &nbsp; (".$ModelFamily[$i].")</option>";
+				}
+				}
+            ?></select>
+        </div>
+        <div class="button-column">
+            <br><br><br><br>
+            <button type="button" id="solutionmultiselect_rightAll" class="btn">>></button>
+            <button type="button" id="solutionmultiselect_rightSelected" class="btn"><i class="glyphicon glyphicon-chevron-right"></i>></button>
+            <button type="button" id="solutionmultiselect_leftSelected" class="btn"><i class="glyphicon glyphicon-chevron-left"></i><</button>
+            <button type="button" id="solutionmultiselect_leftAll" class="btn"><i class="glyphicon glyphicon-backward"></i><<</button>
+        </div>
+        
+        <div class="right-column">
+        	<b>Selected Models:</b>
+            <select name="modelId[]" id="solutionmultiselect_to" class="form-control" size="20" multiple="multiple" style="width:225px"></select>
+        </div>
+    </div>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        $('#allmultiselect').multiselect({sort:false});      
+    });
+</script>
+
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        $('#multiselect').multiselect({sort:false});
+    });
+</script>
+
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        $('#solutionmultiselect').multiselect({sort:false});
+    });
+</script>
 
 <!--Category-->
 <tr>
 <td>Category:</td>
-<td><select name="category" type="text" />
+<td><select name="category" required />
 	<option value=" "></option>
 	<?php
 	for ($i=0; $i< $categorynumrows; $i++) {
@@ -154,9 +271,81 @@ if(!isset($_SESSION['user'])) {
 
 </td>
 </tr>
+
+<!--Status Codes-->
 <tr>
-	<td>How To?</td>
-	<td><input type="radio" value="No" name="howTo" id="howToNo" select="notselected">No<br>
+    
+<td class="statusCode">Status Code:</td><td class="statusCode"><select type="text" name=statusCode>
+	<option value = " "</option>
+	<?php
+	for ($i=0; $i< $statusCodenumrows; $i++) {
+    echo "<option value = '". $statusCode[$i] . "'>". $statusCode[$i] . "</option>";  
+}
+    ?></select>
+
+
+
+</td>
+</tr>
+
+<!--Boot Codes-->
+<tr>
+    
+<td class="bootCode">Status Code:</td><td class="bootCode"><select type="text" name=bootCode>
+	<option value = " "</option>
+	<?php
+	for ($i=0; $i< $bootCodenumrows; $i++) {
+    echo "<option value = '". $bootCode[$i] . "'>". $bootCode[$i] . "</option>";  
+}
+    ?></select>
+
+
+
+</td>
+</tr>
+<!--Fin Codes-->
+<tr>
+    
+<td class="finCode">Sub Code:</td><td class="finCode"><select type="text" name=finCode>
+	<option value = " "</option>
+	<?php
+	for ($i=0; $i< $finCodenumrows; $i++) {
+    echo "<option value = '". $finCode[$i] . "'>". $finCode[$i] . "</option>";  
+}
+    ?></select>
+<!--Auth Codes-->
+<tr>
+    
+<td class="authCode">Sub Code:</td><td class="authCode"><select type="text" name=authCode>
+	<option value = " "</option>
+	<?php
+	for ($i=0; $i< $authCodenumrows; $i++) {
+    echo "<option value = '". $authCode[$i] . "'>". $authCode[$i] . "</option>";  
+}
+    ?></select>
+
+<!--Prodedure Codes-->
+<tr>
+    
+<td class="procedureCode">Sub Code:</td><td class="procedureCode"><select type="text" name=procedureCode>
+	<option value = " "</option>
+	<?php
+	for ($i=0; $i< $procedureCodenumrows; $i++) {
+    echo "<option value = '". $procedureCode[$i] . "'>". $procedureCode[$i] . "</option>";  
+}
+    ?></select>
+
+
+</td>
+</tr>
+
+
+
+
+
+<tr>
+	<td>Model Exclusive?</td>
+	<td><input type="radio" value="No" name="howTo" id="howToNo" checked>No<br>
 	<input type="radio" id = "howToYes" value="Yes" name="howTo">Yes
 	
 	</td>
@@ -164,11 +353,11 @@ if(!isset($_SESSION['user'])) {
 <tr>
 <tr>
 <td>Symptom:</td>
-<td><input type="text" name="problem" value="" size="100" id="problem"></td>
+<td><input type="text" name="problem" value="" size="100" id="problem" required></td>
 </tr>
 <tr>
 <td>Suggestion:</td>
-<td><textarea name="solution" cols="85" rows="5" id="solution"></textarea></td>
+<td><textarea name="solution" cols="85" rows="5" id="solution" required></textarea></td>
 </tr>
 <tr>
 <td colspan=2 align="center" id='botones'>
@@ -176,20 +365,20 @@ if(!isset($_SESSION['user'])) {
 <!--TEMP SUCCESS-->	
 <input type = "hidden" value ="0" name ="success">	
 <input type = "hidden" value = "<?php echo $name; ?>"name = "enteredBy">	
-<input type=submit name=Enviar value='Submit'>
-<input type=reset name=reset value='Reset'>
-<input type=button name=Cancel value='Cancel' id="cancel">
+<input type=submit name=Enviar value='Submit' class="button">
+<input type=reset name=reset value='Reset' class="button">
+<input type=button name=Cancel value='Cancel' id="cancel" class="button">
 </td>
 </tr>
 </table>
 </form>
-
+<br /><br />
 <script type="text/javascript">
 
 var frmvalidator  = new Validator("editForm");
-frmvalidator.addValidation("ticket","req","You must enter a ticket number");
+//frmvalidator.addValidation("ticket","req","You must enter a ticket number");
 frmvalidator.addValidation("category","req","You must enter a category");
-frmvalidator.addValidation("model","req","You must enter at least one model");
+frmvalidator.addValidation("modelId","req","You must enter at least one model");
 frmvalidator.addValidation("problem","req","You must enter a symptom");
 frmvalidator.addValidation("solution","req","You must enter a suggestion");
 frmvalidator.addValidation("howTo","selone","Is This a \"HOW TO\"");
@@ -198,6 +387,17 @@ frmvalidator.addValidation("howTo","selone","Is This a \"HOW TO\"");
 //frmvalidator.addValidation("scanCode","req","You must enter a scan Code", "VWZ_IsListItemSelected()(document.forms['editForm'].elements['category'],'Scan')");//NOT WORKING YET
 
 </script>
+
+<script src="js/jquery-picklist.js"></script>
+	<script src="js/jquery.ui.widget.js"></script>
+
+	<script type="text/javascript">
+		$(function()
+		{
+			jQuery("#basic").pickList();
+		});
+	</script>
+	    
 </body>
 </html>
 

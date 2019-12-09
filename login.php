@@ -30,7 +30,7 @@ if (($password != "") && ($password == $row['password'])) {
     if ($row['admin'] != 0) {
         //setcookie('admin', 'yes', time() + (86400), "/"); // 86400 = 1 day
         $_SESSION['admin'] = $row['admin'];
-    }
+    }else{$_SESSION['admin'] = 0;}
     //Set the cookie
     $_SESSION['user'] = $row['username'];
     $_SESSION['name'] = $row['name'];
@@ -46,7 +46,7 @@ if (($password != "") && ($password == $row['password'])) {
 } else {//wrong credentials provided
 
     echo "<script type='text/javascript'>alert('Wrong UserName or Password');
-	 window.location.replace('/repairDEV/index.php');</script>";
+	 window.location.replace('/repair/index.php');</script>";
     //FIXME
 
 }

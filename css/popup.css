@@ -1,0 +1,22 @@
+body {
+	width:300px;
+}
+table {
+	width=290px;
+	padding:20px;
+	border:1px solid black;
+}
+th {
+	background:yellow;
+	padding:10px;
+	border: 1px solid black;
+}
+td {
+	padding:20px;
+	border:1px solid black;
+}
+.newConfirmedRepair {
+	display: none
+	width:300px;
+	
+}

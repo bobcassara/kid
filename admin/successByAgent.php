@@ -72,9 +72,9 @@ if (isset($_REQUEST['report'])){  //Report
 <br><br><center>
 
 <form action="successByAgent.php" method = "get" id="successForm">
-	<table border="1" class="adminTable">
+	<table border="1" class="dateTable">
 		<tr class="row1">
-                    <td colspan=2> <center><b>Success by Agent</b></center></td>
+                    <td colspan=2> <center>Thumbs Up</center></td>
 		
 		
 		</tr>
@@ -95,7 +95,7 @@ if (isset($_REQUEST['report'])){  //Report
 		</tr>
 	
 </table>
-
+<br><br><br><br><br><br><br><br><br><br>
 </form><!--Report Form-->
 <?php
 
@@ -111,12 +111,12 @@ if ($success=="true" AND $report=="View") {
 	$totalRows = mysqli_num_rows($result);
 	echo "<b>".$totalRows." Solutions were marked as success during this time period (".$startDate." to ".$endDate.")</b><br><br>";
 	//echo $totalRows;
-	echo "<tr><td><b>Ticket</b></td><td><b>RepairID</b></td><td><b>Agent</b></td><td><b>Date</b></td></tr>";
+	echo "<tr class='row1'><td>Ticket</td><td>RepairID</td><td>Agent</td><td>Date</td></tr>";
 	while ($row = $result->fetch_assoc()) {
 		echo "<tr>
 		
-		<td>".$row['ticket']."</td><td>".
-		$row['repairID']."</td><td>".
+		<td>".$row['ticket']."</td><td>
+		<a href='../index.php?id=".$row['repairID']."'>".$row['repairID']."</a></td><td>".
 		$row['author']."</td><td>".
 		$row['date']."</td></tr>";
 		
@@ -133,7 +133,9 @@ if ($success=="true" AND $report=="Export") {
 	$_SESSION['enddate']  = $endDate;
 	
 	//jump to export.php
-	header("Location: successExport.php");
+	echo"<script>
+ window.location.assign('successExport.php')
+</script>";
 }
 ?>
 </center>

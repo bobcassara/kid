@@ -15,7 +15,10 @@
 session_start();
 
 //Error Reporting
-error_reporting(0);
+		error_reporting(0);
+		//ini_set('display_errors', 1);
+		//ini_set('display_startup_errors', 1);
+		//error_reporting(E_ALL);
 
 //Lets Connect to the db
 
@@ -37,7 +40,14 @@ if (isset($_SESSION['user'])){
 	$row = $result->fetch_assoc();
     $name = $row['name'];
 	}
-//Lets get the form variables
+//Init variables
+
+
+	$startDate="";
+	$date="";
+	$success="";
+	$agent="";
+	//Lets get the form variables
 
 if (isset($_REQUEST['startdate'])){  //Start DAte
 	$startDate= mysqli_real_escape_string($connection, $_REQUEST['startdate']);
@@ -66,9 +76,9 @@ include("adminHeader.html");
 <!--Main Content-->
 <br><br>
 <form action="authoredByAgent.php" method = "get" id= "authorForm">
-	<table border="1" align="center">
-		<tr>
-			<td colspan=2><center><b>Authored by Agent</b></center></td>
+	<table border="1" align="center" class="dateTable">
+		<tr class="row1">
+			<td colspan=2><center>Authored by Agent</center></td>
 		
 		
 		</tr>
@@ -93,38 +103,55 @@ include("adminHeader.html");
 		
 		
 		</tr>-->
-		<tr><input type="hidden" name="success" value="true"><td></td><td><center><input type="submit" name = "report" value = "View">&nbsp;&nbsp;<input type="submit" name = "report" value = "Export"></center></td>
+		<tr><input type="hidden" name="success" value="true"><td></td><td><center><input type="submit" name = "report" value = "View" class = "button">&nbsp;&nbsp;<input type="submit" name = "report" value = "Export" class="button"></center></td>
 		</tr></td>
 		</tr>
 	
 </table>
-<br><br>
+<br><br><br><br><br><br><br><br><br><br><br>
 </form><!--Report Form-->
-
 <?php 
 
 if ($success=="true" AND $report=="View") {
 	
 	//Do the Query
-	$query="SELECT * FROM sharp  INNER JOIN staff ON sharp.staffId = staff.staffId WHERE date >= '$startDate' AND date <= '$endDate'";
+	$query="SELECT * FROM sharp WHERE date >= '$startDate' AND date <= '$endDate'";
 	//print $query;
-	echo"<table border=1 align=center>";
+	echo"<table border=1 align=center class='adminTable'>";
 	$result = mysqli_query($connection,$query);
 	$totalRows = mysqli_num_rows($result);
 	//Print table header
 	echo "<b>".$totalRows." Solutions were entered during this time period (".$startDate." to ".$endDate.")</b><br><br>";
-	echo "<tr><td>Ticket</td><td>Category</td><td>Agent</td><td>Symptom</td><td>Solution</td><td>Date</td></tr>";
+	echo "<tr class='row1'><td>Ticket</td><td>Category</td><td>Agent</td><td>Symptom</td><td>Solution</td><td>Date</td></tr>";
 	//echo $totalRows;
+	
+	
+	
+	
+	
 	while ($row = $result->fetch_assoc()) {
-		$staffnumber = $row['staffId'];
-		$newstaff=$staff[$staffnumber-1];
+		
+		$staffQuery="Select name FROM staff WHERE `staffId` = '$row[staffId]'";
+		//print $staffQuery;
+		$staffResult=mysqli_query($connection,$staffQuery);
 		
 		
+		
+		while($staffRow = mysqli_fetch_assoc($staffResult)) {
+        $staffName=$staffRow['name'];
+        //print "STAFFBNAME = ".$staffName;
+    }
+		
+		
+		
+	
+		//print $staffName;
 		echo "<tr>
 		
 		<td>".$row['ticket']."</td><td>".
 		$row['category']."</td><td>".
-		$newstaff."</td><td>".
+		//$row['staffId']."</td><td>".
+		$staffName."</td><td>".
 		$row['problem']."</td><td>".
 		$row['solution']."</td><td>".
 		$row['date']."</td></tr>";
@@ -140,9 +167,14 @@ if ($success=="true" AND $report=="Export") {
 	$_SESSION['enddate']  = $endDate;
 	
 	//jump to export.php
-	header("Location: authorExport.php");
+	//header("Location: authorExport.php");
+	echo "<script>
+		window.location.assign('authorExport.php')
+		</script>";
 }
 ?>
+
+
 <!--Form Validation-->
 <script type="text/javascript">
 var frmvalidator  = new Validator("authorForm");

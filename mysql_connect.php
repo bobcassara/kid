@@ -29,7 +29,7 @@ while ($row = $result -> fetch_assoc()) {
 
 //Staff
 
-$query = "SELECT * FROM staff";
+$query = "SELECT * FROM staff WHERE datatable ='MFP'";
 $result = mysqli_query($connection, $query);
 $staffnumrows = mysqli_num_rows($result);
 
@@ -40,7 +40,7 @@ while ($row = $result -> fetch_assoc()) {
 }
 //Category
 
-$query = "SELECT * FROM categories";
+$query = "SELECT * FROM categories ORDER BY category";
 $result = mysqli_query($connection, $query);
 $categorynumrows = mysqli_num_rows($result);
 
@@ -51,50 +51,17 @@ while ($row = $result -> fetch_assoc()) {
 }
 //Model ALL
 
-$query = "SELECT * FROM model ORDER BY `modelNumber` ASC";
+$query = "SELECT * FROM model ORDER BY `family` ASC";
 $result = mysqli_query($connection, $query);
 $modelnumrows = mysqli_num_rows($result);
 
 while ($row = $result -> fetch_assoc()) {
-    $Model[] = $row['modelNumber'];
+    $Model[] = $row['model'];
     $ModelID[] = $row['modelId'];
+	$ModelFamily[]=$row['family'];
 
 }
 
-//Model Color
-
-$query = "SELECT * FROM model WHERE `modelType` = 'color'";
-$result = mysqli_query($connection, $query);
-$modelcolornumrows = mysqli_num_rows($result);
-
-while ($row = $result -> fetch_assoc()) {
-    $ModelColor[] = $row['modelNumber'];
-    $ModelIDColor[] = $row['modelId'];
-
-}
-
-//Model Black and White
-
-$query = "SELECT * FROM model WHERE `modelType` = 'bw'";
-$result = mysqli_query($connection, $query);
-$modelbwnumrows = mysqli_num_rows($result);
-
-while ($row = $result -> fetch_assoc()) {
-    $ModelBw[] = $row['modelNumber'];
-    $ModelIDBw[] = $row['modelId'];
-
-}
-//Model Solutions
-
-$query = "SELECT * FROM model WHERE `modelType` = 'solutions'";
-$result = mysqli_query($connection, $query);
-$modelsolutionsnumrows = mysqli_num_rows($result);
-
-while ($row = $result -> fetch_assoc()) {
-    $ModelSolutions[] = $row['modelNumber'];
-    $ModelIDSolutions[] = $row['modelId'];
-
-}
 //Print Codes
 
 $query = "SELECT * FROM printCodes ORDER by `printSub`";
@@ -145,6 +112,51 @@ $imageCodenumrows = mysqli_num_rows($result);
 while ($row = $result -> fetch_assoc()) {
     $imageCode[] = $row['imageSub'];
 }
+
+//Status Message Codes
+
+$query = "SELECT * FROM statusCodes ORDER by `StatusCode`";
+$result = mysqli_query($connection, $query);
+$statusCodenumrows = mysqli_num_rows($result);
+while ($row = $result -> fetch_assoc()) {
+    $statusCode[] = $row['statusCode'];
+}
+
+//Boot Failure Codes
+$query = "SELECT * FROM bootCodes ORDER by `bootCode`";
+$result = mysqli_query($connection, $query);
+$bootCodenumrows = mysqli_num_rows($result);
+while ($row = $result -> fetch_assoc()) {
+    $bootCode[] = $row['bootCode'];
+}
+
+//Fin Codes
+$query = "SELECT * FROM finCodes ORDER by `finCode`";
+$result = mysqli_query($connection, $query);
+$finCodenumrows = mysqli_num_rows($result);
+while ($row = $result -> fetch_assoc()) {
+    $finCode[] = $row['finCode'];
+}
+//Auth Codes
+$query = "SELECT * FROM authCodes ORDER by `authCode`";
+$result = mysqli_query($connection, $query);
+$authCodenumrows = mysqli_num_rows($result);
+while ($row = $result -> fetch_assoc()) {
+    $authCode[] = $row['authCode'];
+}
+//Procedure Codes
+$query = "SELECT * FROM procedureCodes ORDER by `procedureCode`";
+$result = mysqli_query($connection, $query);
+$procedureCodenumrows = mysqli_num_rows($result);
+while ($row = $result -> fetch_assoc()) {
+    $procedureCode[] = $row['procedureCode'];
+}
+
+
+
+
+
+
 //echo "<pre>";
 //var_dump($serviceCode);
 //echo "</pre>";

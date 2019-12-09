@@ -72,9 +72,9 @@ if (isset($_REQUEST['report'])){  //Report
 <br><br><center>
 
 <form action="thumbsDown.php" method = "get" id="successForm">
-	<table border="1">
-		<tr>
-			<td colspan=2><center><b>Thumbs Down by Agent</b></center></td>
+	<table border="1" class="dateTable">
+		<tr class="row1">
+			<td colspan=2><center>Thumbs Down by Agent</center></td>
 		
 		
 		</tr>
@@ -91,10 +91,10 @@ if (isset($_REQUEST['report'])){  //Report
 				new datepickr('enddate', { dateFormat: 'Y-m-d' });
 				</script></td>
 		</tr>
-		<tr><input type="hidden" name="success" value="true"><td></td><td><center><input type="submit" name = "report" value = "View">&nbsp;&nbsp;<input type="submit" name = "report" value = "Export"></center></td>
+		<tr><input type="hidden" name="success" value="true"><td></td><td><center><input type="submit" name = "report" value = "View" class="button">&nbsp;&nbsp;<input type="submit" name = "report" value = "Export" class="button"></center></td>
 		</tr>
 	
-</table>
+</table><br><br><br>
 </form><!--Report Form-->
 
 <?php
@@ -106,18 +106,19 @@ if ($success=="true" AND $report=="View") {
 	
 	//print $query;
 	echo "<br><br>";
-	echo"<table border='1'>";
+	echo"<table border='1' class='adminTable'>";
 	$result = mysqli_query($connection,$query);
 	$totalRows = mysqli_num_rows($result);
 	echo "<b>".$totalRows." Thumbs Down reports have been submitted during this time period. (".$startDate." to ".$endDate.")</b><br><br>";
 	//echo $totalRows;
-	echo "<tr><td><b>Ticket</b></td><td><b>Model</b></td><td><b>Category</b></td><td><b>Sub Categoory</b></td><td><b>Problem</b></td><td><b>Agent</b></td><td><b>Date</b></td></tr>";
+	echo "<tr class='row1'><td>Ticket</td><td>Notes</td><td>Model</td><td>Category</td><td>Sub Category</td><td>Problem</td><td>Agent</td><td>Date</td></tr>";
 	while ($row = $result->fetch_assoc()) {
 		if ($row['category']=="%") $row['category']="";
 		
 		echo "<tr>
 		
 		<td>".$row['ticket']."</td><td>".
+		$row['notes']."</td><td>".
 		$row['model']."</td><td>".
 		$row['category']."</td><td>".
 		$row['subCat']."</td><td>".

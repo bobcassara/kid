@@ -1,11 +1,11 @@
 <?php
 
 //Error Reporting
-error_reporting(0);
+//error_reporting(0);
 
 //Lets Connect to the db
 
-include ("mysql_connect.php");
+require ("mysql_connect.php");
 
 //Lets get the form variables
 
@@ -15,14 +15,17 @@ if (isset($_REQUEST['id'])) {//ID
 
 //Delete this ID from the database
 
-$query = "DELETE FROM sharp WHERE id='$id' LIMIT=1";
-
-print $query;
-
-if (mysqli_query($connection, $query)) {
-
-    mysqli_close($connection);
+// delete record from database
+if ($stmt = $connection->prepare("DELETE FROM sharp WHERE id = ? LIMIT 1"))
+{
+$stmt->bind_param("i",$id);
+$stmt->execute();
+$stmt->close();
 }
-
+else
+{
+echo "ERROR: could not prepare SQL statement.";
+}
+$connection->close();
 header('location:index.php');
 ?>

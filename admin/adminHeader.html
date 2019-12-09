@@ -1,5 +1,55 @@
 <!--Header Area-->
 
+<script type="text/javascript"><!--DropDownMewnu-->
+<!--
+var timeout         = 500;
+var closetimer		= 0;
+var ddmenuitem      = 0;
+
+// open hidden layer
+function mopen(id)
+{	
+	// cancel close timer
+	mcancelclosetime();
+
+	// close old layer
+	if(ddmenuitem) ddmenuitem.style.visibility = 'hidden';
+
+	// get new layer and show it
+	ddmenuitem = document.getElementById(id);
+	ddmenuitem.style.visibility = 'visible';
+
+}
+// close showed layer
+function mclose()
+{
+	if(ddmenuitem) ddmenuitem.style.visibility = 'hidden';
+}
+
+// go close timer
+function mclosetime()
+{
+	closetimer = window.setTimeout(mclose, timeout);
+}
+
+// cancel close timer
+function mcancelclosetime()
+{
+	if(closetimer)
+	{
+		window.clearTimeout(closetimer);
+		closetimer = null;
+	}
+}
+
+// close layer when click-out
+document.onclick = mclose; 
+// -->
+</script>
+
+
+
+
 <table width="100%" border="0" >
   <tr>
     <td><img align="left" name="logo" type="image" src="../images/sharp-transparent.png" width="250"/></td>
@@ -8,27 +58,36 @@
     </tr>
 </table>
 
-<hr>
-<br /><br />	
-<!--Dababase Management-->
-<div class="nav_left">
-    <br />
-    <div id="divDatabaseManagement">
-    <input type = "button" value = "Home" class="button" name = "home" id="home"><br />
+<ul id="sddm">
+	<li><a href="#" onmouseover="mopen('m1')" onmouseout="mclosetime()">Home</a>
+		<div id="m1" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+		<a href="#" value = "Home" name = "home" id="home">KID Home &nbsp;&nbsp;</a>
+		<a href="http://172.29.39.23">Main Menu</a>
+		</div>
+	</li>
+	<li><a href="#" onmouseover="mopen('m2')" onmouseout="mclosetime()">Database</a>
+		<div id="m2" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+		<a href="#" name = "avaya" id="avaya">Add Avaya Data</a>
+		<a href="#" name = "adminNewModel" id="adminNewModel">Add New Model</a>
+		<a href="#" name = "editModel" id="editModel">Edit Model</a>
+		<a href="#" name = "adminEditStaff" id="editStaff">Edit Staff</a>
+		<a href="#" name = "adminEditCategory" id="adminEditCategory">Edit Category</a>
+		<a href="#" name = "exportDatabase" id="exportDatabase">Export Database</a>
+		</div>
+	</li>
+	<li><a href="#" onmouseover="mopen('m3')" onmouseout="mclosetime()">Reports</a>
+		<div id="m3" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">
+		<a href="#"id="summary" name = "summary">Agent Summary</a>
+		<a href="#" name = "editsByAgent" id="editsByAgent">Edits</a>
+		<a href="#" id="authoredByAgent" name = "adminAuthoredbyAgent">Authored</a>
+		<a href="#" name = "successByAgent" id="successByAgent">Thumbs Up</a>
+		<a href="#" id="adminThumbsDown" name = "adminThumbsDown">Thumbs Down</a>
+		<a href="#" id="adminConfirmedRepair" name = "adminConfirmedRepair">Confirmed Repair</a>
+		</div>
+	</li>
+	
+</ul>
+<div style="clear:both"></div>
 
-    <h4>Database Management</h4>
+<div style="clear:both"></div>
 
-
-    <input type = "button" value = "Add New Model Series" class="button" name = "adminNewModel"><br />
-    <input type = "button" value = "Add/Edit Staff" class = "button" name = "adminEditStaff" id="editStaff"><br />
-    <input type = "button" value = "Add/Edit Category" class = "button" name = "adminEditCategory">
-
-    <h4>Reports</h4>
-    <input type = "button" value = "Success by Agent" class="button" name = "successByAgent" id="successByAgent"><br />
-    <input type = "button" value = "Authored by Agent" class = "button" id="authoredByAgent" name =       "adminAuthoredbyAgent"><br />
-    <input type = "button" value = "Thumbs Down" class = "button" id="adminThumbsDown" name = "adminThumbsDown">
-
-    <br />
-    <br />
-</div>
-</div>	

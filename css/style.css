@@ -6,12 +6,13 @@ body {
     font-weight: normal;
     font-variant: normal;
     background-color: #ffffff;
-    width: 1200px;
     margin: 0px auto;
-    text-align: center;
+	text-align: center;
+	width:95%; 
+	min-width: 650px;
 }
 h1 {
-    font-size: 20px;
+    font-size: 17px;
     color: #115db2;
 }
 h4 {
@@ -30,26 +31,85 @@ input {
     background-color: #FFFFFF;
 }
 
+#sddm
+{	margin: 0;
+	padding: 0;
+	z-index: 30}
+
+#sddm li
+{	margin: 0;
+	padding: 0;
+	list-style: none;
+	float: left;
+	font: bold 11px arial}
+
+#sddm li a
+{	display: block;
+	margin: 0 1px 0 0;
+	padding: 4px 10px;
+	width: 60px;
+	background: #115db2;
+	color: #FFF;
+	text-align: center;
+	text-decoration: none}
+
+#sddm li a:hover
+{	background: #49A3FF}
+
+#sddm div
+{	position: absolute;
+	visibility: hidden;
+	margin: 0;
+	padding: 0;
+	background: #115db2;
+	border: 1px solid #5970B2}
+
+	#sddm div a
+	{	position: relative;
+		display: block;
+		margin: 0;
+		padding: 5px 10px;
+		width: auto;
+		white-space: nowrap;
+		text-align: left;
+		text-decoration: none;
+		background: #115db2;
+		color: #ffffff;
+		font: 11px arial}
+
+	#sddm div a:hover
+	{	background: #49A3FF;
+		color: #FFF}
+
+
+
+
 .modelTextBox {
     width: 100px;
+	border-radius: 5px;
+	
 }
 .ticketTextBox {
-    display: none
+    display: none;
+	
 }
 .problemTextBox {
     width: 700px;
+	
 }
 select {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
     background-color: white;
+	
 }
+
 hr {
     clear: both;
     margin: 0;
     color: #115db2;
     background-color: #115db2;
-    height: 3px;
+    height: 2px;
 }
 
 a img {
@@ -63,12 +123,31 @@ table td {
 }
 
 table.searchtable {
-    width: 100%;
-    background-color: #E8E8E8;
-    border-spacing: 10px;
+    width: 950px;
+    margin-left:auto; 
+    margin-right:auto;
+    background-color: none;/*#E8E8E8*/
+    border-spacing: 5px;
+    font-size: 10px;
+	font-weight:bold;
+}
+table.searchtable td{
+	padding: 7px;
+	font-weight:bold;
+}
+table.searchtable select{
+	font-size:10px;
+	width: 150px;
+}
+td.searchTableHeadings {
+	text-align:center;
+	font-size:12px;
+	
 }
 table#mainTable {
-    width: 1185px;
+    /*width: 1185px;*/
+   width:100%;
+   table-layout:fixed;
 }
 table#mainTable td {
     /*background-color:white;*/
@@ -78,27 +157,81 @@ table#mainTable td {
     border-color: #999999;
 }
 .howTo td {
-    background-color: #C2FFA3;
+    /*background-color: #C2FFA3; see function.js */                                             
+    border: 1px;
+    padding: 1px;
+    /*border-style: solid;
+    border-color: #999999;*/
+}
+.internal td {
+    background-color: #ff6666;
     border: 1px;
     padding: 1px;
     border-style: solid;
     border-color: #999999;
 }
 #mainWindow {
-    height: 350px;
+    height: 550px;
     width: 100%;
     overflow: scroll;
     overflow-y: scroll;
     overflow-x: hidden;
 }
-#mainTableHeader td {
-    width: 1185px;
-    table-layout: fixed;
+.mainTableHeader {
+    
+    table-layout:fixed;
+    width:100%;
     color: #115db2;
     text-align: center;
     font-weight: bold;
 }
-
+.row-ID {
+	text-align:center;
+	overflow:hidden;
+	width:3%;
+}
+.row-status {
+	text-align:center;
+	overflow:hidden;
+	width:4%;
+}
+.row-Date {
+	text-align:center;
+	overflow:hidden;
+	width:7%;
+}
+.row-Category {
+	text-align:center;
+	overflow:hidden;
+	width:8%;
+}
+.row-Sub-category {
+	text-align:center;
+	overflow:hidden;
+	width:8%;
+}
+.row-Model {
+	text-align:center;
+	overflow:hidden;
+	width:20%;
+}
+.row-Symptom {
+	border:0px solid black;
+	text-align:center;
+	overflow:hidden;
+	width:15%;
+}
+.row-Suggestion {
+	border:0px solid black;
+	text-align:center;
+	overflow:hidden;
+	width:30%;
+}
+.row-Success {
+	text-align:center;
+	overflow:hidden;
+	width:5%;
+}
 .noSolution {
     text-align: right;
 }
@@ -128,9 +261,36 @@ table#mainTable td {
     color: red;
 }
 
+.statusCode {
+    display: none;
+    color: red;
+}
+
+.bootCode {
+	display: none;
+    color: red;
+}
+.finCode {
+	display: none;
+    color: red;
+}
+.authCode {
+	display: none;
+    color: red;
+}
+.procedureCode {
+	display: none;
+    color: red;
+}
+
+
+
+
+
 /*----------------------------------------*/
 
 .hideModels {
+	
     display: none;
 }
 
@@ -139,6 +299,7 @@ table#mainTable td {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+    height:500px;
 }
 #tableDatabaseManagement {
     margin-left: auto;
@@ -160,6 +321,15 @@ table#mainTable td {
 }
 .textBox {
     width:120px;
+	border-radius: 5px;
+}
+
+#status {
+	height:25px;
+	line-height: 25px;
+	/*background-color:#ccc;*/
+	text-align:center;
+	font-weight:bold;
 }
 
 .calendar {
@@ -282,8 +452,8 @@ td.darkGray {
     padding:5px;
 }
 .button {
-    font-family: Tahoma;
-    font-size: 11px;
+    font-family: Arial;
+    font-size: 12px;
     font-weight: bold;
     color: #115db2;
     padding-top: 3px;
@@ -291,6 +461,10 @@ td.darkGray {
     padding-bottom: 3px;
     padding-left: 3px;
     border-top-width: 1px;
+	
+	border-radius: 10px;
+	box-shadow: 4px 4px 4px #888888;
+	
     /*border-right-width-value: 1px;*/
     border-bottom-width: 1px;
     /*border-left-width-value: 1px;*/
@@ -320,12 +494,101 @@ td.darkGray {
     background-position: center bottom;
     background-color: #fefefe;
     height: 25px;
-    width: 130px;
+    width: 100px;
 }
 .button:hover {
     background-image: none;
     background-color: #99ffff;
 }
+.idcToggle {
+    font-family: Arial;
+    font-size: 12px;
+    font-weight: bold;
+    color: #115db2;
+    padding-top: 3px;
+    padding-right: 3px;
+    padding-bottom: 3px;
+    padding-left: 3px;
+    border-top-width: 1px;
+	
+	border-radius: 10px;
+	box-shadow: 4px 4px 4px #888888;
+	
+    /*border-right-width-value: 1px;*/
+    border-bottom-width: 1px;
+    /*border-left-width-value: 1px;*/
+    border-left-width: 1px;
+    /*border-right-width-value: 1px;*/
+    border-left-style: solid;
+    /*border-right-style-value: solid;*/
+    border-top-style: solid;
+    /*border-right-style-value: solid;*/
+    border-bottom-style: solid;
+    /*border-left-style-value: solid;*/
+    border-top-color: #115db2;
+    /*border-right-color-value: #115db2;*/
+    border-bottom-color: #115db2;
+    /*border-left-color-value: #115db2;*/
+    border-left-color: #115db2;
+    /*border-right-color-value: #115db2;*/
+    border-right-color: #115db2;
+    /*border-left-color-value: #115db2;*/
+    border-image-source: none;
+    border-image-slice: 100% 100% 100% 100%;
+    border-image-width: 1 1 1 1;
+    border-image-outset: 0 0 0 0;
+    border-image-repeat: stretch stretch;
+    background-image: url("../images/button_bg.gif");
+    background-repeat: repeat-x;
+    background-position: center bottom;
+    background-color: #fefefe;
+    height: 25px;
+    width: 200px;
+}
+.idcToggle:hover {
+    background-image: none;
+    background-color: #99ffff;
+}
+/* Top Navigation Bar */
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #115db2;
+}
+
+li {
+    display: block;
+    float: left;
+    color:white;
+    text-align: center;
+    padding: 7px 16px;
+    text-decoration: none;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+
+li a:hover {
+    background-color: none;
+}
+
+#kidlogo {
+	font-size:16px; 
+	font-weight:bold; 
+	position:fixed;
+	right:75px;
+	top: 10px;
+	color:white;
+	
+}
+
 /*Admin Page*/
 .nav_left {
     float: left;
@@ -334,15 +597,83 @@ td.darkGray {
     background-color: #ccc;
 }
 .adminTable {
-    margin-left: 50px;
-    float: left;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width:70%;
+    /*float: left;*/
+    color: #115db2;
+}
+.adminTable1 td{
+	text-align: center;
+}
+table.dateTable {
+	text-align:center;
+    margin-left: auto;
+    margin-right: auto;
+    width:350px;;
+    /*float: left;*/
     color: #115db2;
 }
 tr.row1 {
     background-color: #ccc;
+    text-align:center;
+    font-weight:bold;
 }
 .staffTable {
     border: 2px solid black;
     width: 25%;
     float: right;
+}
+.staffTable td {
+	border:1px solid black;
+}
+/*Model Entry*/
+.allModels {
+	display: none;
+}
+.mxModels {
+	display: none;
+}
+.solutionModels {
+	display: none;
+}
+.row {
+	/*background:#ccc;*/
+    overflow: hidden;
+    border:0px solid black;
+}
+.left-column {
+	float:left;
+	padding:10px;
+	width:235px;
+	
+}
+.button-column {
+	float:left;
+	width:50px;
+	
+}
+.right-column{
+	float:left;
+	padding:10px;
+	width:250px;
+}
+.form-control {
+	width=249px;
+	
+}
+.btn {
+	width:50px;
+	font-weight:bold;
+}
+select.option {
+	width=250px;
+}
+#.form-control {
+	width=250px;
+}
+/*Model Information Page*/
+.modelinfo {
+	margin-left: 20px;
 }

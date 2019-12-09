@@ -17,8 +17,8 @@
 
         //Get the id number and ticket number
 
-        $id = mysqli_real_escape_string($connection, $_GET['id']);
-        $ticket = mysqli_real_escape_string($connection, $_GET['ticket']);
+        $id = mysqli_real_escape_string($connection, $_REQUEST['id']);
+        $ticket = mysqli_real_escape_string($connection, $_REQUEST['ticket']);
 
         if (isset($_REQUEST['ticket'])) {
             $ticket = $_REQUEST['ticket'];

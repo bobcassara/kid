@@ -4,7 +4,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>Knowledge Database</title>
-		<link href="style.css" rel="stylesheet" type="text/css" />
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
 		<script src="js/jquery-2.1.3.min.js"></script>
 		<script src="js/functions.js"></script>
 	</head>
@@ -37,22 +37,28 @@
         //Init the variables
 
         $category = "";
-        $ticket = "";
+        $jticket = "";
         $model = "";
         $subCat = "";
         $problem = "";
         $solution = "";
-
+        $notes = "";
         //Lets get the form variables
 
         if (isset($_REQUEST['category'])) {//category
             $category = mysqli_real_escape_string($connection, $_REQUEST['category']);
         }
-        if (isset($_REQUEST['ticket'])) {//Ticket
-            $ticket = mysqli_real_escape_string($connection, $_REQUEST['ticket']);
-        }
+        if (isset($_REQUEST['jticket'])) {//Ticket
+            $jticket = mysqli_real_escape_string($connection, $_REQUEST['jticket']);
+		}
+		//if (isset($_REQUEST['ticket'])) {//Ticket
+            //$jticket = mysqli_real_escape_string($connection, $_REQUEST['ticket']);
+        //}
         if (isset($_REQUEST['model'])) {//model
             $model = mysqli_real_escape_string($connection, $_REQUEST['model']);
+        }
+        if (isset($_REQUEST['notes'])) {//call notes
+            $notes = mysqli_real_escape_string($connection, $_REQUEST['notes']);
         }
         //SUB CATS//
 
@@ -88,12 +94,13 @@
         if (isset($_REQUEST['solution'])) {//solution
             $solution = mysqli_real_escape_string($connection, $_REQUEST['solution']);
         }
-
+		if ($notes==""){$notes ="--No notes were entered--";}
+		if ($category=="%"){$category="";}
         //The Query
 
-        $query = "INSERT INTO nosuccess VALUES (NULL, '$ticket', '$model','$category','$subCat', '$problem', '$solution', '$username' , NOW())";
-
-        //echo $query;
+        $query = "INSERT INTO nosuccess VALUES (NULL, '$jticket','$notes','$model','$category','$subCat', '$problem', '$solution', '$username' , NOW())";
+		
+        echo $query;
         mysqli_query($connection, $query) or die(mysqli_error($connection));
 		?>
 		<script type = "text/javascript">
@@ -108,6 +115,6 @@
                 }
             })
 		</script>
-		";
+		
 	</body>
 </html>
