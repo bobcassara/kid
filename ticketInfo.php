@@ -9,13 +9,12 @@ $serverName = '172.29.99.92';
 $connectionOptions = array(
     "Database" => 'SharpCallCenter',
     "Uid" => 'MSGREAD',
-    "PWD" => 'blu-1r1s'
 );
 //Establishes the connection
 $conn = sqlsrv_connect($serverName, $connectionOptions);
- 
 
- 
+
+
  //Get from URL
 
 
@@ -25,9 +24,9 @@ if (isset($_REQUEST['ticket'])) {
             //$ticketNumber = "%".$ticketNumber."%";
         } 
 
- 
+
 //$query = sqlsrv_query($conn, $tsql);("SET ANSI_NULLS ON;");
-//$query = sqlsrv_query($conn, $tsql);("SET ANSI_WARNINGS ON;"); 
+//$query = sqlsrv_query($conn, $tsql);("SET ANSI_WARNINGS ON;");
 
 $q = "SELECT * FROM dbo.SharpCT_tblSupportTickets WHERE SupportTicketID LIKE '$ticketNumber'";
 
@@ -42,8 +41,8 @@ print "<table border = 1 cellpadding = 4>
 
 
 while ($row = sqlsrv_fetch_array($query)) {
-	
-	
+
+
 	//Get Resolution
 	$qres = "SELECT * FROM dbo.SharpCT_tblSupportTicketResolutionSource WHERE TicketID LIKE '$ticketNumber'";
 	//print $qres;
@@ -63,17 +62,14 @@ while ($row = sqlsrv_fetch_array($query)) {
 	$qmod = "SELECT * FROM dbo.SharpCT_tblModels WHERE modelID LIKE '$modelID'";
 	$queryMod = sqlsrv_query($conn, $qmod);
 	$numberOfResults = sqlsrv_num_rows($queryMod);
-	
+
 	while ($rowMod = sqlsrv_fetch_array($queryMod)) {
 		$modelName=$rowMod['ModelName'];}
-  
-  
+
+
   echo "<tr><td>";
   echo $row['SupportTicketID']. "</td><td>". date_format($row['CreatedDate'], 'Y-m-d')."</td><td>".$modelName."</td><td>".$row['SerialNumber']."</td><td>".$resolutionText."</td><td>".$row['Description']."</td><td>".$row['ResolutionSummary']."</td></tr>";
 }
 
 
 echo "</table>";
-
-
-
